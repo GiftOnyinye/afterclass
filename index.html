@@ -1,0 +1,3593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AFTERCLASS — the internet girl's personal archive</title>
+<meta name="description" content="A corner of the internet for quizzes, moodboards, obsessions, diary entries, and fictional chaos.">
+<style>
+/* ============================================================
+   FONTS — local-first stack, no dependency on external services
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Caveat:wght@400;600&display=swap');
+
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  --paper-blush: #F9EAF2;
+  --soft-white: #FFFCFE;
+  --lilac: #C5B6F5;
+  --pink: #F48DB5;
+  --butter: #FFE5A9;
+  --sage: #B9D9C7;
+  --ink: #342B3C;
+  --ink-soft: #5a4f64;
+  --ink-faint: #8b8093;
+  --line: #e5d6de;
+  --line-strong: #cbb9c4;
+
+  --serif: 'Fraunces', 'Iowan Old Style', 'Georgia', serif;
+  --sans: 'DM Sans', -apple-system, 'Segoe UI', system-ui, sans-serif;
+  --hand: 'Caveat', 'Segoe Print', cursive;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  --shadow-paper: 0 1px 0 rgba(52,43,60,.06), 0 2px 6px rgba(52,43,60,.05);
+  --shadow-lift: 3px 3px 0 var(--ink);
+  --shadow-lift-sm: 2px 2px 0 var(--ink);
+
+  --focus: 2px solid var(--ink);
+  --focus-offset: 3px;
+
+  --maxw: 1180px;
+  --gutter: clamp(16px, 3vw, 32px);
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper-blush);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(52,43,60,.045) 1px, transparent 0);
+  background-size: 22px 22px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: 600; line-height: 1.15; }
+p { margin: 0 0 .9em; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+input, textarea, select { font-family: inherit; font-size: inherit; color: inherit; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; padding: 0; margin: 0; }
+:focus-visible { outline: var(--focus); outline-offset: var(--focus-offset); }
+::selection { background: var(--butter); color: var(--ink); }
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+.serif { font-family: var(--serif); }
+.hand { font-family: var(--hand); }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: .72rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 3px 8px; border: 1.5px solid var(--ink);
+  border-radius: 999px; background: var(--soft-white);
+  line-height: 1.3;
+}
+.tag.lilac { background: var(--lilac); }
+.tag.pink { background: var(--pink); }
+.tag.butter { background: var(--butter); }
+.tag.sage { background: var(--sage); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 18px; border: 1.5px solid var(--ink);
+  background: var(--soft-white); color: var(--ink);
+  font-weight: 600; font-size: .9rem;
+  border-radius: var(--radius-sm);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  box-shadow: var(--shadow-lift-sm);
+  white-space: nowrap;
+  line-height: 1.1;
+}
+.btn:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--ink); }
+.btn:active { transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--ink); }
+.btn.primary { background: var(--ink); color: var(--soft-white); }
+.btn.primary:hover { background: #241d2b; }
+.btn.pink { background: var(--pink); }
+.btn.lilac { background: var(--lilac); }
+.btn.butter { background: var(--butter); }
+.btn.sage { background: var(--sage); }
+.btn.small { padding: 6px 12px; font-size: .8rem; box-shadow: 1.5px 1.5px 0 var(--ink); }
+.btn.ghost { box-shadow: none; background: transparent; }
+.btn.ghost:hover { background: var(--soft-white); box-shadow: var(--shadow-lift-sm); }
+.btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+.field {
+  display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px;
+}
+.field label {
+  font-size: .78rem; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ink-soft);
+}
+.input, .textarea, .select {
+  width: 100%; padding: 10px 12px;
+  border: 1.5px solid var(--line-strong);
+  background: var(--soft-white);
+  border-radius: var(--radius-sm);
+  font-size: .95rem; color: var(--ink);
+  transition: border-color .12s;
+}
+.input:focus, .textarea:focus, .select:focus {
+  outline: none; border-color: var(--ink);
+}
+.textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+.section-label {
+  font-family: var(--hand);
+  font-size: 1.25rem;
+  color: var(--ink-soft);
+  display: inline-block;
+  transform: rotate(-1.5deg);
+  margin-bottom: 4px;
+}
+
+/* ============================================================
+   APP SHELL
+   ============================================================ */
+#app { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ---- HEADER ---- */
+.masthead {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(249,234,242,.88);
+  backdrop-filter: blur(8px);
+  border-bottom: 1.5px solid var(--ink);
+}
+.masthead-inner {
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 10px var(--gutter);
+  display: flex; align-items: center; gap: 18px;
+}
+.wordmark {
+  font-family: var(--serif); font-weight: 700;
+  font-size: 1.5rem; letter-spacing: -.02em;
+  display: inline-flex; align-items: baseline; gap: 2px;
+  line-height: 1;
+}
+.wordmark .dot { color: var(--pink); }
+.wordmark small {
+  font-family: var(--sans); font-size: .58rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-soft); margin-left: 6px;
+  align-self: flex-end; padding-bottom: 3px;
+}
+.masthead-mood {
+  display: none;
+  font-size: .78rem; color: var(--ink-soft);
+  border-left: 1.5px solid var(--line-strong);
+  padding-left: 18px; max-width: 220px; line-height: 1.35;
+}
+.masthead-mood em { font-family: var(--hand); font-style: normal; font-size: 1rem; color: var(--ink); }
+@media (min-width: 900px) { .masthead-mood { display: block; } }
+
+.nav-main {
+  margin-left: auto; display: flex; align-items: center; gap: 4px;
+}
+.nav-link {
+  padding: 7px 11px; font-size: .86rem; font-weight: 500;
+  color: var(--ink-soft); border-radius: var(--radius-sm);
+  position: relative; transition: color .12s;
+  white-space: nowrap;
+}
+.nav-link:hover { color: var(--ink); background: rgba(255,252,254,.7); }
+.nav-link.active { color: var(--ink); font-weight: 700; }
+.nav-link.active::after {
+  content: ""; position: absolute; left: 11px; right: 11px; bottom: 2px;
+  height: 2px; background: var(--pink); border-radius: 2px;
+}
+.nav-secondary { display: flex; align-items: center; gap: 4px; }
+.nav-icon-btn {
+  width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;
+  border: 1.5px solid transparent; border-radius: var(--radius-sm);
+  background: transparent; color: var(--ink);
+}
+.nav-icon-btn:hover { border-color: var(--ink); background: var(--soft-white); }
+.nav-icon-btn svg { width: 18px; height: 18px; }
+
+.mobile-toggle { display: none; }
+@media (max-width: 780px) {
+  .nav-main { display: none; }
+  .mobile-toggle { display: inline-flex; margin-left: auto; }
+  .masthead-inner { gap: 10px; }
+}
+
+/* ---- MOBILE NAV DRAWER ---- */
+.drawer-scrim {
+  position: fixed; inset: 0; background: rgba(52,43,60,.35);
+  z-index: 90; opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.drawer-scrim.open { opacity: 1; pointer-events: auto; }
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 86vw);
+  background: var(--soft-white); border-left: 1.5px solid var(--ink);
+  z-index: 100; transform: translateX(100%);
+  transition: transform .24s cubic-bezier(.4,0,.2,1);
+  padding: 20px; display: flex; flex-direction: column; gap: 4px;
+  overflow-y: auto;
+}
+.drawer.open { transform: translateX(0); }
+.drawer-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1.5px solid var(--line);
+}
+.drawer-nav { display: flex; flex-direction: column; gap: 2px; }
+.drawer-nav a {
+  padding: 12px 10px; font-size: 1.05rem; font-weight: 600;
+  border-radius: var(--radius-sm); display: flex; align-items: center; gap: 10px;
+}
+.drawer-nav a:hover { background: var(--paper-blush); }
+.drawer-nav a.active { background: var(--butter); }
+.drawer-nav .num { font-family: var(--hand); color: var(--ink-faint); font-size: 1rem; }
+
+/* ---- MAIN ---- */
+main { flex: 1; }
+.page { max-width: var(--maxw); margin: 0 auto; padding: clamp(24px,4vw,48px) var(--gutter) 80px; }
+.page-narrow { max-width: 780px; }
+
+/* ---- FOOTER ---- */
+.site-footer {
+  border-top: 1.5px solid var(--ink);
+  background: var(--soft-white);
+  margin-top: auto;
+}
+.site-footer-inner {
+  max-width: var(--maxw); margin: 0 auto;
+  padding: 28px var(--gutter);
+  display: flex; flex-wrap: wrap; gap: 18px 32px;
+  align-items: flex-start; justify-content: space-between;
+  font-size: .82rem; color: var(--ink-soft);
+}
+.site-footer .wordmark { font-size: 1.1rem; }
+.site-footer p { max-width: 340px; margin: 6px 0 0; line-height: 1.5; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.footer-links a { border-bottom: 1px solid var(--line-strong); padding-bottom: 1px; }
+.footer-links a:hover { border-color: var(--pink); color: var(--ink); }
+
+/* ============================================================
+   HOMEPAGE — EDITORIAL LOBBY
+   ============================================================ */
+.lobby { position: relative; }
+
+.lobby-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  padding-bottom: 40px;
+  border-bottom: 1.5px solid var(--ink);
+  margin-bottom: 40px;
+  position: relative;
+}
+@media (min-width: 860px) {
+  .lobby-hero { grid-template-columns: 1.35fr 1fr; gap: 40px; }
+}
+.lobby-hero-copy { position: relative; }
+.lobby-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: .74rem; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+.lobby-kicker::before {
+  content: ""; width: 28px; height: 1.5px; background: var(--ink);
+}
+.lobby-title {
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  line-height: .95;
+  letter-spacing: -.03em;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.lobby-title .accent {
+  font-style: italic; font-weight: 400;
+  color: var(--ink-soft);
+}
+.lobby-title .underline {
+  position: relative; white-space: nowrap;
+}
+.lobby-title .underline::after {
+  content: ""; position: absolute; left: -2%; right: -2%; bottom: 4%;
+  height: .35em; background: var(--butter); z-index: -1;
+  transform: rotate(-1deg); border-radius: 2px;
+}
+.lobby-greeting {
+  font-family: var(--hand);
+  font-size: 1.5rem;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+  transform: rotate(-1deg);
+  display: inline-block;
+}
+.lobby-lede {
+  font-size: 1.05rem; line-height: 1.55;
+  color: var(--ink-soft); max-width: 46ch;
+  margin-bottom: 26px;
+}
+.lobby-cta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.lobby-cta-row .aside-note {
+  font-family: var(--hand); font-size: 1.1rem; color: var(--ink-faint);
+  transform: rotate(-2deg);
+}
+
+/* right rail of hero */
+.lobby-hero-rail {
+  display: flex; flex-direction: column; gap: 16px;
+}
+.rail-card {
+  border: 1.5px solid var(--ink);
+  background: var(--soft-white);
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  position: relative;
+}
+.rail-card.tape::before {
+  content: ""; position: absolute; top: -9px; left: 50%;
+  width: 60px; height: 18px; background: rgba(244,141,181,.55);
+  transform: translateX(-50%) rotate(-2deg);
+  border-radius: 2px;
+  box-shadow: 0 1px 0 rgba(52,43,60,.08);
+}
+.rail-card .rail-head {
+  font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-soft);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+}
+.rail-card .rail-body {
+  font-family: var(--serif); font-size: 1.05rem; line-height: 1.35;
+  font-weight: 600;
+}
+.rail-card .rail-meta {
+  font-family: var(--hand); font-size: 1.05rem; color: var(--ink-soft);
+  margin-top: 8px;
+}
+.rail-status {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .82rem; color: var(--ink-soft);
+}
+.status-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--sage); border: 1.5px solid var(--ink);
+  animation: pulse 2.4s infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(185,217,199,.6); }
+  50% { box-shadow: 0 0 0 5px rgba(185,217,199,0); }
+}
+
+/* editorial collage grid */
+.lobby-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+@media (min-width: 720px) {
+  .lobby-grid { grid-template-columns: repeat(6, 1fr); }
+}
+
+.feat-quiz {
+  grid-column: span 6;
+  background: var(--soft-white);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  box-shadow: var(--shadow-paper);
+  transition: transform .18s, box-shadow .18s;
+}
+.feat-quiz:hover { transform: translateY(-2px); box-shadow: 4px 4px 0 var(--ink); }
+@media (min-width: 720px) {
+  .feat-quiz { grid-column: span 4; grid-template-columns: 1fr; }
+}
+@media (min-width: 720px) {
+  .feat-quiz.featured { grid-column: span 6; grid-template-columns: 1.2fr 1fr; }
+}
+.feat-quiz-cover {
+  padding: 26px 24px;
+  background: linear-gradient(160deg, var(--lilac), var(--pink));
+  color: var(--ink);
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.feat-quiz-cover::after {
+  content: ""; position: absolute; right: -30px; bottom: -30px;
+  width: 140px; height: 140px; border-radius: 50%;
+  border: 2px dashed rgba(52,43,60,.35);
+}
+.feat-quiz-cover .cover-tag {
+  font-size: .68rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; display: inline-block;
+  padding: 3px 8px; background: var(--ink); color: var(--soft-white);
+  border-radius: 2px; align-self: flex-start;
+}
+.feat-quiz-cover h3 {
+  font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  line-height: 1; letter-spacing: -.02em; font-weight: 700;
+  margin: 14px 0 6px; position: relative; z-index: 1;
+}
+.feat-quiz-cover .cover-sub {
+  font-size: .9rem; color: rgba(52,43,60,.8); max-width: 32ch;
+  position: relative; z-index: 1;
+}
+.feat-quiz-info {
+  padding: 22px 24px;
+  display: flex; flex-direction: column; gap: 12px;
+  justify-content: center;
+}
+.feat-quiz-info .meta-row {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  font-size: .78rem; color: var(--ink-soft);
+}
+.feat-quiz-info .meta-row span {
+  display: inline-flex; align-items: center; gap: 4px;
+}
+
+/* smaller collage tiles */
+.collage-tile {
+  grid-column: span 6;
+  border: 1.5px solid var(--ink);
+  background: var(--soft-white);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative;
+  box-shadow: var(--shadow-paper);
+  transition: transform .16s, box-shadow .16s;
+}
+@media (min-width: 720px) {
+  .collage-tile { grid-column: span 2; }
+  .collage-tile.wide { grid-column: span 3; }
+  .collage-tile.tall { grid-row: span 2; }
+}
+.collage-tile:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--ink); }
+.collage-tile .tile-label {
+  font-size: .68rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-soft);
+  display: flex; align-items: center; gap: 6px;
+}
+.collage-tile h3 {
+  font-family: var(--serif); font-size: 1.5rem; line-height: 1.1;
+  letter-spacing: -.01em;
+}
+.collage-tile p { font-size: .9rem; color: var(--ink-soft); margin: 0; line-height: 1.5; }
+.collage-tile.butter { background: var(--butter); }
+.collage-tile.sage { background: var(--sage); }
+.collage-tile.lilac { background: var(--lilac); }
+.collage-tile.pink { background: var(--pink); }
+.collage-tile.rot { transform: rotate(-.6deg); }
+.collage-tile.rot:hover { transform: rotate(-.6deg) translate(-1px,-1px); }
+
+/* daily question tile */
+.daily-q {
+  background: var(--butter);
+  padding: 22px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-sm);
+}
+.daily-q .q-text {
+  font-family: var(--serif); font-size: 1.25rem; line-height: 1.3;
+  font-weight: 600; margin: 8px 0 12px;
+}
+.daily-q .q-options { display: flex; flex-direction: column; gap: 6px; }
+.daily-q .q-opt {
+  text-align: left; padding: 9px 12px;
+  background: var(--soft-white); border: 1.5px solid var(--ink);
+  border-radius: var(--radius-sm); font-size: .88rem; font-weight: 500;
+  transition: transform .1s, background .1s;
+}
+.daily-q .q-opt:hover { background: var(--paper-blush); }
+.daily-q .q-opt.picked {
+  background: var(--ink); color: var(--soft-white);
+}
+.daily-q .q-result {
+  font-family: var(--hand); font-size: 1.15rem;
+  margin-top: 10px; color: var(--ink-soft);
+}
+
+/* currently obsessed */
+.obsessed-mini {
+  display: flex; gap: 14px; align-items: center;
+}
+.obsessed-mini .art {
+  width: 64px; height: 64px; flex-shrink: 0;
+  border: 1.5px solid var(--ink); border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--lilac), var(--pink));
+  display: grid; place-items: center;
+  font-family: var(--serif); font-weight: 700; font-size: 1.4rem;
+  color: var(--ink);
+  position: relative; overflow: hidden;
+}
+.obsessed-mini .art::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(52,43,60,.18) 1px, transparent 0);
+  background-size: 8px 8px;
+}
+.obsessed-mini .info { flex: 1; min-width: 0; }
+.obsessed-mini .info .title {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 600;
+  line-height: 1.2;
+}
+.obsessed-mini .info .sub {
+  font-size: .78rem; color: var(--ink-soft); margin-top: 2px;
+}
+
+/* moodboard preview mini */
+.mb-preview {
+  aspect-ratio: 4/3; border: 1.5px solid var(--ink);
+  border-radius: var(--radius-sm); overflow: hidden;
+  background: var(--soft-white);
+  display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr);
+  gap: 2px; padding: 4px;
+}
+.mb-preview .cell {
+  border-radius: 2px;
+  display: grid; place-items: center;
+  font-size: .7rem; color: var(--ink-soft);
+  font-family: var(--hand);
+}
+
+/* discovery prompt */
+.discover-prompt {
+  background: var(--ink); color: var(--soft-white);
+  padding: 22px;
+  border-radius: var(--radius-sm);
+  position: relative; overflow: hidden;
+}
+.discover-prompt::before {
+  content: "✦"; position: absolute; top: 12px; right: 16px;
+  font-size: 1.4rem; color: var(--butter);
+}
+.discover-prompt .tile-label { color: var(--butter); }
+.discover-prompt h3 { font-family: var(--serif); font-size: 1.4rem; margin: 8px 0; }
+.discover-prompt p { color: rgba(255,252,254,.75); font-size: .88rem; margin-bottom: 12px; }
+.discover-prompt .btn { box-shadow: none; }
+
+/* ============================================================
+   QUIZ LIBRARY
+   ============================================================ */
+.page-head {
+  margin-bottom: 34px;
+  padding-bottom: 22px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.page-head .eyebrow {
+  font-size: .74rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.page-head .eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--line-strong); }
+.page-head h1 {
+  font-family: var(--serif); font-size: clamp(2rem,4.5vw,3.2rem);
+  line-height: .98; letter-spacing: -.02em; font-weight: 700;
+}
+.page-head .lede {
+  font-size: 1rem; color: var(--ink-soft); max-width: 56ch;
+  margin-top: 12px; line-height: 1.55;
+}
+
+.quiz-grid {
+  display: grid; grid-template-columns: 1fr; gap: 20px;
+}
+@media (min-width: 640px) { .quiz-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 980px) { .quiz-grid { grid-template-columns: 1.2fr 1fr 1fr; } }
+
+.quiz-card {
+  border: 1.5px solid var(--ink);
+  background: var(--soft-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: var(--shadow-paper);
+  transition: transform .18s, box-shadow .18s;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+}
+.quiz-card:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--ink); }
+.quiz-card .qc-cover {
+  padding: 22px;
+  min-height: 150px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.quiz-card .qc-cover::after {
+  content: ""; position: absolute; right: -24px; top: -24px;
+  width: 90px; height: 90px; border-radius: 50%;
+  border: 2px solid rgba(52,43,60,.2);
+}
+.quiz-card:nth-child(3n+1) .qc-cover { background: var(--lilac); }
+.quiz-card:nth-child(3n+2) .qc-cover { background: var(--sage); }
+.quiz-card:nth-child(3n+3) .qc-cover { background: var(--butter); }
+.quiz-card:nth-child(1) .qc-cover { background: linear-gradient(160deg, var(--pink), var(--lilac)); }
+.qc-cover .qc-cat {
+  font-size: .66rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; align-self: flex-start;
+  padding: 2px 7px; background: var(--ink); color: var(--soft-white); border-radius: 2px;
+}
+.qc-cover h3 {
+  font-family: var(--serif); font-size: 1.5rem; line-height: 1.05;
+  letter-spacing: -.01em; font-weight: 700; margin-top: 14px;
+  position: relative; z-index: 1;
+}
+.quiz-card .qc-body {
+  padding: 14px 22px 18px;
+  display: flex; flex-direction: column; gap: 8px; flex: 1;
+}
+.quiz-card .qc-desc { font-size: .85rem; color: var(--ink-soft); line-height: 1.45; flex: 1; }
+.quiz-card .qc-foot {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .75rem; color: var(--ink-faint); padding-top: 8px;
+  border-top: 1px dashed var(--line-strong);
+}
+.quiz-card .qc-foot .arrow { font-weight: 700; color: var(--ink); }
+
+/* quiz-taking */
+.quiz-run { max-width: 720px; margin: 0 auto; }
+.quiz-run-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 24px; gap: 16px;
+}
+.quiz-run-head .back {
+  font-size: .84rem; font-weight: 600; color: var(--ink-soft);
+  display: inline-flex; align-items: center; gap: 6px; border: none;
+  background: none; padding: 4px 0;
+}
+.quiz-run-head .back:hover { color: var(--ink); }
+.progress-track {
+  flex: 1; height: 6px; background: var(--line);
+  border-radius: 99px; overflow: hidden; max-width: 260px;
+}
+.progress-fill {
+  height: 100%; background: var(--ink); border-radius: 99px;
+  transition: width .3s ease;
+}
+.q-counter { font-size: .78rem; font-weight: 600; color: var(--ink-soft); white-space: nowrap; }
+
+.quiz-question {
+  background: var(--soft-white);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: clamp(22px,4vw,36px);
+  box-shadow: var(--shadow-paper);
+}
+.quiz-question .qq-tag {
+  font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-faint);
+  margin-bottom: 12px;
+}
+.quiz-question h2 {
+  font-family: var(--serif); font-size: clamp(1.4rem,3vw,1.9rem);
+  line-height: 1.2; font-weight: 600; letter-spacing: -.01em;
+  margin-bottom: 24px;
+}
+.qq-options { display: flex; flex-direction: column; gap: 10px; }
+.qq-opt {
+  text-align: left; padding: 14px 16px;
+  border: 1.5px solid var(--line-strong);
+  background: var(--soft-white);
+  border-radius: var(--radius-sm);
+  font-size: .95rem; line-height: 1.4; color: var(--ink);
+  transition: transform .12s, border-color .12s, background .12s, box-shadow .12s;
+  display: flex; align-items: center; gap: 12px;
+}
+.qq-opt .letter {
+  width: 24px; height: 24px; flex-shrink: 0;
+  border: 1.5px solid var(--line-strong); border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: .75rem; font-weight: 700; color: var(--ink-soft);
+}
+.qq-opt:hover {
+  border-color: var(--ink); background: var(--paper-blush);
+  transform: translateX(2px);
+}
+.qq-opt.selected {
+  border-color: var(--ink); background: var(--butter);
+  box-shadow: var(--shadow-lift-sm);
+  transform: translate(-1px,-1px);
+}
+.qq-opt.selected .letter { background: var(--ink); color: var(--soft-white); border-color: var(--ink); }
+
+.quiz-run-foot {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 24px; gap: 12px;
+}
+
+/* quiz results */
+.quiz-result {
+  max-width: 780px; margin: 0 auto;
+}
+.result-card {
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--soft-white);
+  box-shadow: 6px 6px 0 var(--ink);
+  margin-bottom: 24px;
+}
+.result-head {
+  padding: clamp(24px,4vw,40px);
+  position: relative;
+  overflow: hidden;
+}
+.result-head::after {
+  content: ""; position: absolute; right: -40px; top: -40px;
+  width: 160px; height: 160px; border-radius: 50%;
+  border: 2px dashed rgba(52,43,60,.3);
+}
+.result-head .result-kicker {
+  font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; margin-bottom: 10px;
+  display: inline-block; padding: 3px 9px;
+  background: var(--ink); color: var(--soft-white); border-radius: 2px;
+}
+.result-head h1 {
+  font-family: var(--serif); font-size: clamp(2rem,5vw,3.2rem);
+  line-height: .98; letter-spacing: -.02em; font-weight: 700;
+}
+.result-head .result-sub {
+  font-family: var(--hand); font-size: 1.4rem;
+  margin-top: 8px; color: var(--ink-soft);
+}
+.result-body { padding: 0 clamp(24px,4vw,40px) clamp(24px,4vw,40px); }
+.result-desc {
+  font-size: 1.02rem; line-height: 1.6; color: var(--ink-soft);
+  margin: 20px 0;
+}
+.result-traits {
+  display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0;
+}
+.result-traits .tag { font-size: .72rem; }
+
+.result-actions {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px;
+}
+.result-others {
+  margin-top: 30px; padding-top: 22px; border-top: 1.5px solid var(--line);
+}
+.result-others h3 {
+  font-family: var(--serif); font-size: 1.2rem; margin-bottom: 14px;
+}
+.result-others .other-list { display: flex; flex-direction: column; gap: 8px; }
+.result-others .other-item {
+  display: flex; gap: 12px; align-items: baseline;
+  padding: 10px 12px; border: 1.5px dashed var(--line-strong);
+  border-radius: var(--radius-sm);
+  font-size: .88rem;
+}
+.result-others .other-item strong { font-family: var(--serif); }
+
+/* ============================================================
+   OBSESSION FILES
+   ============================================================ */
+.obs-toolbar {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  margin-bottom: 24px;
+}
+.obs-search {
+  flex: 1; min-width: 180px; position: relative;
+}
+.obs-search input {
+  width: 100%; padding: 9px 12px 9px 36px;
+  border: 1.5px solid var(--ink); background: var(--soft-white);
+  border-radius: var(--radius-sm); font-size: .9rem;
+}
+.obs-search svg {
+  position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+  width: 16px; height: 16px; color: var(--ink-soft); pointer-events: none;
+}
+.filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font-size: .78rem; font-weight: 600; padding: 6px 12px;
+  border: 1.5px solid var(--line-strong); background: var(--soft-white);
+  border-radius: 999px; color: var(--ink-soft);
+  transition: all .12s;
+}
+.chip:hover { border-color: var(--ink); color: var(--ink); }
+.chip.active { background: var(--ink); color: var(--soft-white); border-color: var(--ink); }
+
+.obs-collection { display: flex; flex-direction: column; gap: 32px; }
+.obs-cat-head {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-bottom: 14px; padding-bottom: 8px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.obs-cat-head h2 {
+  font-family: var(--serif); font-size: 1.6rem; font-weight: 700;
+  letter-spacing: -.01em;
+}
+.obs-cat-head .count {
+  font-family: var(--hand); font-size: 1.1rem; color: var(--ink-faint);
+}
+.obs-cat-head .accent-line {
+  flex: 1; height: 1px; background: var(--line-strong);
+}
+
+.obs-grid {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+.obs-item {
+  border: 1.5px solid var(--ink);
+  background: var(--soft-white);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform .16s, box-shadow .16s;
+  position: relative;
+  group: obs;
+}
+.obs-item:hover { transform: translate(-2px,-2px); box-shadow: 3px 3px 0 var(--ink); }
+.obs-cover {
+  aspect-ratio: 1; position: relative;
+  display: grid; place-items: center;
+  background: var(--lilac);
+  border-bottom: 1.5px solid var(--ink);
+  overflow: hidden;
+}
+.obs-cover img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.obs-cover .fallback-letter {
+  font-family: var(--serif); font-size: 2.4rem; font-weight: 700;
+  color: rgba(52,43,60,.55);
+}
+.obs-cover .rating {
+  position: absolute; top: 6px; right: 6px;
+  font-size: .68rem; font-weight: 700; padding: 2px 6px;
+  background: var(--ink); color: var(--butter); border-radius: 2px;
+  font-family: var(--hand); font-size: .95rem;
+}
+.obs-info { padding: 9px 10px 11px; display: flex; flex-direction: column; gap: 3px; flex: 1; }
+.obs-info .obs-title {
+  font-family: var(--serif); font-weight: 600; font-size: .95rem;
+  line-height: 1.2;
+  overflow: hidden; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.obs-info .obs-sub { font-size: .72rem; color: var(--ink-faint); }
+.obs-info .obs-note {
+  font-size: .76rem; color: var(--ink-soft); font-style: italic;
+  line-height: 1.35; margin-top: 2px;
+  overflow: hidden; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.obs-item .obs-del {
+  position: absolute; top: 4px; left: 4px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(255,252,254,.9); border: 1.5px solid var(--ink);
+  display: grid; place-items: center; font-size: .8rem; font-weight: 700;
+  opacity: 0; transition: opacity .12s;
+}
+.obs-item:hover .obs-del, .obs-item:focus-within .obs-del { opacity: 1; }
+
+.empty-state {
+  text-align: center; padding: 48px 24px;
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--radius-md); background: var(--soft-white);
+}
+.empty-state .empty-mark {
+  font-family: var(--serif); font-size: 2.6rem; color: var(--lilac);
+  margin-bottom: 10px; line-height: 1;
+}
+.empty-state h3 { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 8px; }
+.empty-state p { color: var(--ink-soft); max-width: 40ch; margin: 0 auto 16px; font-size: .92rem; }
+
+/* modal system */
+.modal-scrim {
+  position: fixed; inset: 0; background: rgba(52,43,60,.45);
+  z-index: 200; display: none; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; transition: opacity .2s;
+}
+.modal-scrim.open { display: flex; opacity: 1; }
+.modal {
+  background: var(--soft-white);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  max-width: 520px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  padding: 24px;
+  box-shadow: 6px 6px 0 var(--ink);
+  transform: scale(.97); transition: transform .2s;
+}
+.modal-scrim.open .modal { transform: scale(1); }
+.modal-head {
+  display: flex; justify-content: space-between; align-items: start;
+  margin-bottom: 18px; gap: 12px;
+}
+.modal-head h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
+.modal-close {
+  width: 30px; height: 30px; border: 1.5px solid var(--ink);
+  border-radius: 50%; background: var(--soft-white);
+  display: grid; place-items: center; flex-shrink: 0;
+  font-size: 1rem; line-height: 1;
+}
+.modal-close:hover { background: var(--paper-blush); }
+.modal-actions {
+  display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   LORE ARCHIVE
+   ============================================================ */
+.lore-layout {
+  display: grid; grid-template-columns: 1fr; gap: 28px;
+}
+@media (min-width: 900px) {
+  .lore-layout { grid-template-columns: 280px 1fr; gap: 36px; align-items: start; }
+}
+.lore-sidebar {
+  background: var(--soft-white);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  position: sticky; top: 90px;
+}
+@media (max-width: 899px) { .lore-sidebar { position: static; } }
+.lore-sidebar h2 {
+  font-family: var(--serif); font-size: 1.2rem; margin-bottom: 4px;
+}
+.lore-sidebar .sidebar-note {
+  font-family: var(--hand); font-size: 1.05rem; color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+.lore-sidebar .btn { width: 100%; margin-bottom: 16px; }
+.lore-filters { display: flex; flex-direction: column; gap: 10px; }
+.lore-filters .field { margin-bottom: 0; }
+
+.lore-entries { display: flex; flex-direction: column; gap: 20px; }
+.lore-entry {
+  border: 1.5px solid var(--ink);
+  background: var(--soft-white);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  position: relative;
+  box-shadow: var(--shadow-paper);
+  background-image: repeating-linear-gradient(
+    transparent, transparent 27px, rgba(52,43,60,.06) 27px, rgba(52,43,60,.06) 28px
+  );
+  background-position: 0 22px;
+}
+.lore-entry .entry-date {
+  font-family: var(--hand); font-size: 1.05rem; color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+.lore-entry h3 {
+  font-family: var(--serif); font-size: 1.5rem; line-height: 1.15;
+  letter-spacing: -.01em; margin-bottom: 8px;
+}
+.lore-entry .entry-body {
+  font-size: .95rem; line-height: 1.7; color: var(--ink-soft);
+  white-space: pre-wrap; word-wrap: break-word;
+  max-height: 6.8em; overflow: hidden;
+  position: relative;
+}
+.lore-entry.expanded .entry-body { max-height: none; }
+.lore-entry .entry-meta {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line-strong);
+}
+.lore-entry .entry-actions {
+  display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+}
+.chaos-meter {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: .72rem; font-weight: 600; color: var(--ink-soft);
+}
+.chaos-meter .bars { display: flex; gap: 2px; }
+.chaos-meter .bar {
+  width: 6px; height: 12px; border-radius: 1px;
+  background: var(--line-strong);
+}
+.chaos-meter .bar.filled { background: var(--pink); }
+
+/* diary editor */
+.diary-editor {
+  background: var(--soft-white);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: 26px;
+  box-shadow: var(--shadow-paper);
+}
+.diary-editor .field { margin-bottom: 18px; }
+.diary-editor textarea.body {
+  min-height: 240px;
+  line-height: 1.7;
+  background-image: repeating-linear-gradient(
+    transparent, transparent 27px, rgba(52,43,60,.07) 27px, rgba(52,43,60,.07) 28px
+  );
+  background-position: 0 8px;
+  padding: 8px 12px;
+}
+.diary-editor .editor-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+@media (max-width: 560px) { .diary-editor .editor-row { grid-template-columns: 1fr; } }
+.chaos-picker { display: flex; gap: 6px; }
+.chaos-picker button {
+  flex: 1; padding: 8px 4px; border: 1.5px solid var(--line-strong);
+  background: var(--soft-white); border-radius: var(--radius-sm);
+  font-size: .78rem; font-weight: 600; color: var(--ink-soft);
+}
+.chaos-picker button.active {
+  background: var(--pink); border-color: var(--ink); color: var(--ink);
+}
+
+/* ============================================================
+   GROUP CHAT
+   ============================================================ */
+.chat-wrap {
+  display: grid; grid-template-columns: 1fr; gap: 20px;
+}
+@media (min-width: 900px) {
+  .chat-wrap { grid-template-columns: 260px 1fr; align-items: start; }
+}
+.chat-scenarios {
+  background: var(--soft-white);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+@media (min-width: 900px) { .chat-scenarios { position: sticky; top: 90px; } }
+.chat-scenarios h2 {
+  font-family: var(--serif); font-size: 1.1rem; margin-bottom: 6px;
+}
+.scenario-btn {
+  text-align: left; padding: 10px 12px;
+  border: 1.5px solid var(--line-strong); border-radius: var(--radius-sm);
+  background: var(--soft-white); font-size: .85rem; font-weight: 500;
+  transition: all .12s;
+}
+.scenario-btn:hover { border-color: var(--ink); background: var(--paper-blush); }
+.scenario-btn.active {
+  background: var(--ink); color: var(--soft-white); border-color: var(--ink);
+}
+.scenario-btn .s-meta {
+  display: block; font-size: .7rem; font-weight: 400;
+  opacity: .7; margin-top: 2px;
+}
+
+.chat-main {
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  background: var(--soft-white);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  min-height: 500px;
+}
+.chat-header {
+  padding: 14px 18px;
+  border-bottom: 1.5px solid var(--ink);
+  display: flex; align-items: center; gap: 12px;
+  background: var(--lilac);
+}
+.chat-header .chat-avatars { display: flex; }
+.chat-header .chat-avatars .av {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1.5px solid var(--ink); margin-left: -8px;
+  display: grid; place-items: center;
+  font-family: var(--serif); font-size: .82rem; font-weight: 700;
+  background: var(--soft-white); color: var(--ink);
+}
+.chat-header .chat-avatars .av:first-child { margin-left: 0; }
+.chat-header .chat-title { flex: 1; min-width: 0; }
+.chat-header .chat-title h2 {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 700; line-height: 1.15;
+}
+.chat-header .chat-title .chat-sub { font-size: .74rem; color: var(--ink-soft); }
+.chat-header .chat-fic {
+  font-size: .62rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; padding: 3px 8px;
+  border: 1.5px solid var(--ink); border-radius: 999px;
+  background: var(--butter);
+}
+
+.chat-body {
+  flex: 1; padding: 20px 18px; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 10px;
+  max-height: 560px; min-height: 360px;
+  background-image: radial-gradient(circle at 1px 1px, rgba(52,43,60,.04) 1px, transparent 0);
+  background-size: 18px 18px;
+}
+.msg-row { display: flex; gap: 8px; align-items: flex-end; max-width: 85%; }
+.msg-row.out { align-self: flex-end; flex-direction: row-reverse; }
+.msg-row .msg-av {
+  width: 26px; height: 26px; flex-shrink: 0;
+  border-radius: 50%; border: 1.5px solid var(--ink);
+  display: grid; place-items: center;
+  font-size: .7rem; font-weight: 700; font-family: var(--serif);
+  background: var(--butter);
+}
+.msg-bubble {
+  padding: 9px 13px; border-radius: 14px;
+  font-size: .9rem; line-height: 1.4;
+  border: 1.5px solid var(--ink);
+  background: var(--soft-white);
+  position: relative;
+  word-wrap: break-word; overflow-wrap: anywhere;
+}
+.msg-row .msg-bubble {
+  border-bottom-left-radius: 4px;
+}
+.msg-row.out .msg-bubble {
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 4px;
+  background: var(--butter);
+}
+.msg-name {
+  font-size: .68rem; font-weight: 700; color: var(--ink-soft);
+  margin-bottom: 2px;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.msg-time {
+  font-size: .62rem; color: var(--ink-faint); margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.msg-row.out .msg-time { text-align: right; }
+
+.chat-typing {
+  display: flex; gap: 4px; padding: 10px 14px;
+  align-self: flex-start; margin-left: 34px;
+}
+.chat-typing span {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--ink-faint);
+  animation: typing 1.2s infinite;
+}
+.chat-typing span:nth-child(2) { animation-delay: .15s; }
+.chat-typing span:nth-child(3) { animation-delay: .3s; }
+@keyframes typing {
+  0%,60%,100% { transform: translateY(0); opacity: .4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+.chat-controls {
+  border-top: 1.5px solid var(--ink);
+  padding: 12px 18px; display: flex; gap: 8px; flex-wrap: wrap;
+  background: var(--paper-blush);
+}
+.chat-controls .spacer { flex: 1; }
+
+/* ============================================================
+   MOODBOARD STUDIO
+   ============================================================ */
+.mb-layout { display: grid; grid-template-columns: 1fr; gap: 18px; }
+@media (min-width: 1000px) {
+  .mb-layout { grid-template-columns: 200px 1fr; align-items: start; }
+}
+.mb-sidebar {
+  background: var(--soft-white);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+@media (min-width: 1000px) { .mb-sidebar { position: sticky; top: 90px; } }
+.mb-sidebar h3 {
+  font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-soft);
+  padding-bottom: 4px; border-bottom: 1px solid var(--line);
+}
+.mb-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+@media (min-width: 1000px) { .mb-tools { grid-template-columns: 1fr; } }
+.mb-tool {
+  padding: 8px 10px; border: 1.5px solid var(--line-strong);
+  background: var(--soft-white); border-radius: var(--radius-sm);
+  font-size: .8rem; font-weight: 600; text-align: left;
+  display: flex; align-items: center; gap: 8px;
+  transition: all .12s;
+}
+.mb-tool:hover { border-color: var(--ink); background: var(--paper-blush); }
+.mb-tool svg { width: 14px; height: 14px; flex-shrink: 0; }
+.mb-bg-swatches { display: flex; gap: 6px; flex-wrap: wrap; }
+.mb-swatch {
+  width: 26px; height: 26px; border: 1.5px solid var(--ink);
+  border-radius: var(--radius-sm); cursor: pointer;
+  transition: transform .1s;
+}
+.mb-swatch:hover { transform: scale(1.1); }
+.mb-swatch.active { outline: 2px solid var(--pink); outline-offset: 1px; }
+
+.mb-canvas-wrap {
+  position: relative;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--soft-white);
+  min-height: 480px;
+  box-shadow: var(--shadow-paper);
+}
+.mb-canvas {
+  position: relative;
+  width: 100%; aspect-ratio: 4/3;
+  overflow: hidden;
+  touch-action: none;
+}
+.mb-el {
+  position: absolute; cursor: grab;
+  user-select: none; -webkit-user-select: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.mb-el.selected {
+  outline: 2px solid var(--pink);
+  outline-offset: 2px;
+}
+.mb-el.dragging { cursor: grabbing; }
+.mb-el .el-content {
+  width: 100%; height: 100%; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 2px;
+}
+.mb-el .el-content img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.mb-el .el-content.text-el {
+  padding: 6px; word-break: break-word;
+  text-align: center; line-height: 1.2;
+  font-family: var(--serif); font-weight: 600;
+  color: var(--ink);
+}
+.mb-el .el-content.sticker-el {
+  font-family: var(--hand); font-weight: 700;
+  color: var(--ink);
+}
+.mb-el .el-content.quote-el {
+  padding: 8px; text-align: center;
+  font-family: var(--serif); font-style: italic;
+  line-height: 1.3; color: var(--ink);
+}
+
+.mb-canvas-controls {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 6px; background: var(--soft-white);
+  border: 1.5px solid var(--ink); border-radius: 999px;
+  padding: 4px 8px; box-shadow: var(--shadow-lift-sm);
+}
+.mb-canvas-controls button {
+  width: 30px; height: 30px; border: none; background: transparent;
+  border-radius: 50%; display: grid; place-items: center;
+  font-size: .9rem; color: var(--ink);
+}
+.mb-canvas-controls button:hover { background: var(--paper-blush); }
+
+.mb-inspector {
+  position: absolute; top: 10px; right: 10px;
+  background: var(--soft-white); border: 1.5px solid var(--ink);
+  border-radius: var(--radius-sm); padding: 8px; display: none;
+  gap: 4px; box-shadow: var(--shadow-lift-sm);
+}
+.mb-inspector.show { display: flex; }
+.mb-inspector button {
+  width: 28px; height: 28px; border: 1px solid var(--line-strong);
+  background: var(--soft-white); border-radius: 3px;
+  display: grid; place-items: center; font-size: .8rem;
+}
+.mb-inspector button:hover { border-color: var(--ink); background: var(--paper-blush); }
+
+.mb-bottom-bar {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  padding: 12px 0 0;
+}
+.mb-bottom-bar .spacer { flex: 1; }
+.mb-board-name {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 600;
+  border: none; background: transparent; padding: 4px 6px;
+  border-bottom: 1.5px dashed var(--line-strong);
+  min-width: 120px; max-width: 240px;
+}
+.mb-board-name:focus { outline: none; border-bottom-color: var(--ink); }
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast-host {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  z-index: 300; display: flex; flex-direction: column; gap: 8px;
+  pointer-events: none; width: min(360px, 90vw);
+}
+.toast {
+  background: var(--ink); color: var(--soft-white);
+  padding: 11px 16px; border-radius: var(--radius-sm);
+  font-size: .86rem; font-weight: 500; text-align: center;
+  box-shadow: 0 4px 12px rgba(52,43,60,.25);
+  animation: toastIn .25s ease;
+  pointer-events: auto;
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   MOTION PREFERENCES
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .status-dot { animation: none; }
+}
+
+/* ============================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================ */
+@media (max-width: 480px) {
+  .lobby-title { font-size: 2.4rem; }
+  .page-head h1 { font-size: 1.9rem; }
+  .quiz-grid { gap: 14px; }
+  .obs-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  .lore-entry { padding: 18px; }
+  .chat-body { max-height: 420px; }
+  .mb-canvas-wrap { min-height: 320px; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a href="#/" class="wordmark" aria-label="AFTERCLASS home">
+        AFTERCLASS<span class="dot">.</span>
+        <small>an archive</small>
+      </a>
+      <div class="masthead-mood">
+        <em id="mood-text">currently pretending to study</em><br>
+        <span style="font-size:.72rem">est. 2024 · no algorithm, just vibes</span>
+      </div>
+      <nav class="nav-main" id="nav-main" aria-label="Primary"></nav>
+      <div class="nav-secondary">
+        <button class="nav-icon-btn" id="search-btn" aria-label="Search everything" title="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        </button>
+        <button class="nav-icon-btn" id="settings-btn" aria-label="Personal archive settings" title="Archive settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+        </button>
+        <button class="nav-icon-btn mobile-toggle" id="mobile-toggle" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer-scrim" id="drawer-scrim"></div>
+  <aside class="drawer" id="drawer" aria-label="Mobile navigation">
+    <div class="drawer-header">
+      <span class="wordmark" style="font-size:1.2rem">AFTERCLASS<span class="dot">.</span></span>
+      <button class="nav-icon-btn" id="drawer-close" aria-label="Close menu" style="border-color:var(--ink)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <nav class="drawer-nav" id="drawer-nav"></nav>
+  </aside>
+
+  <main id="main"></main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div>
+        <span class="wordmark" style="font-size:1.1rem">AFTERCLASS<span class="dot">.</span></span>
+        <p>Everything you make here lives in your browser. No account, no server, no one reading over your shoulder. Clear your cache and it's gone — like a real after-school conversation.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#/">Lobby</a>
+        <a href="#/quizzes">Quizzes</a>
+        <a href="#/obsessions">Obsessions</a>
+        <a href="#/lore">Lore</a>
+        <a href="#/chat">Chat</a>
+        <a href="#/moodboard">Moodboard</a>
+      </div>
+      <div style="font-size:.72rem;color:var(--ink-faint);max-width:220px">
+        A fictional corner of the internet, made with more care than strictly necessary.
+      </div>
+    </div>
+  </footer>
+</div>
+<div class="toast-host" id="toast-host"></div>
+<div class="modal-scrim" id="modal-scrim"></div>
+
+<script>
+/* ============================================================
+   AFTERCLASS — application
+   ============================================================ */
+(function(){
+  'use strict';
+
+  // ==========================================================
+  // STORAGE
+  // ==========================================================
+  const STORE = {
+    get(key, fallback) {
+      try {
+        const raw = localStorage.getItem('afterclass:' + key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch(e) { return fallback; }
+    },
+    set(key, val) {
+      try { localStorage.setItem('afterclass:' + key, JSON.stringify(val)); }
+      catch(e) { toast('Storage full — could not save.'); }
+    }
+  };
+
+  // ==========================================================
+  // SEED / DEFAULT DATA
+  // ==========================================================
+  const QUIZZES = [
+    {
+      id: 'group-project',
+      cat: 'school survival',
+      title: 'Which Group Project Member Are You?',
+      desc: 'There are five people in every group project. You are, statistically, one of them. Find out which.',
+      questions: [
+        { q: 'The group chat is silent. It is 11:47pm. You:', opts: [
+          { t: 'Send a polite "hey, just checking in x" and then stare at the wall.', s: 'organiser' },
+          { t: 'Open the doc and start the whole thing because someone has to.', s: 'doer' },
+          { t: 'React with a single 😭 and go to sleep.', s: 'ghost' },
+          { t: 'Send a 400-word brainstorm that nobody asked for.', s: 'ideas' },
+          { t: 'Still don\'t know what the project is about.', s: 'mystery' }
+        ]},
+        { q: 'Your contribution to the slide deck:', opts: [
+          { t: 'Reformatted everyone else\'s work to match the template.', s: 'organiser' },
+          { t: 'Did slides 2 through 9. Alone.', s: 'doer' },
+          { t: 'One (1) slide. It has a clip art on it.', s: 'ghost' },
+          { t: 'Slides 10–11 but they\'re genuinely brilliant.', s: 'ideas' },
+          { t: 'A slide that contradicts the rest of the deck. Nobody knows why.', s: 'mystery' }
+        ]},
+        { q: 'The deadline is tomorrow. Your internal state:', opts: [
+          { t: 'Tight but managed. I made a timeline. I am the timeline.', s: 'organiser' },
+          { t: 'Already done. I finished it last week. I\'m fine.', s: 'doer' },
+          { t: 'What deadline', s: 'ghost' },
+          { t: 'Frantic, but in a generative way. I have ideas!', s: 'ideas' },
+          { t: 'I thought it was next week.', s: 'mystery' }
+        ]},
+        { q: 'The teacher asks "who did what?" You:', opts: [
+          { t: 'Pull up the shared document history. Receipts.', s: 'organiser' },
+          { t: 'Say "we all contributed" because it\'s easier.', s: 'doer' },
+          { t: 'Look at the ceiling.', s: 'ghost' },
+          { t: 'Start explaining the concept that never made it into the project.', s: 'ideas' },
+          { t: 'Genuinely can\'t remember.', s: 'mystery' }
+        ]},
+        { q: 'The project gets a B. Your reaction:', opts: [
+          { t: 'Frustrated. I know exactly which slide cost us.', s: 'organiser' },
+          { t: 'Relieved. I did my best. Whatever.', s: 'doer' },
+          { t: 'What project', s: 'ghost' },
+          { t: 'Already onto the next idea.', s: 'ideas' },
+          { t: 'Genuinely surprised to hear there was a project.', s: 'mystery' }
+        ]}
+      ],
+      results: {
+        organiser: {
+          title: 'The Spreadsheet Whisperer',
+          sub: 'you have a colour-coded calendar and you will not apologise',
+          desc: 'You are the person who makes the group chat have a "plan." You keep receipts, you keep minutes, you keep everybody on the same document. It\'s not about control — it\'s about the fact that nobody else is going to do it, and you cannot emotionally handle a chaos doc with 14 unnamed versions.',
+          traits: ['reliable', 'slightly unhinged about formatting', 'would run a small country', 'tired']
+        },
+        doer: {
+          title: 'The Quiet Engine',
+          sub: 'did the work while everyone was "getting to it"',
+          desc: 'You don\'t need credit and you don\'t need a theme song. You just need everyone to leave you alone so you can actually finish the thing. You are the reason the group project has a middle section. You are also the reason you\'re tired.',
+          traits: ['understated', 'productive', 'secretly wants a thank you', 'good at saying "it\'s fine"']
+        },
+        ghost: {
+          title: 'The Deliberate Absence',
+          sub: 'present in spirit, absent in the shared doc',
+          desc: 'You have a particular talent for vanishing precisely when the group needs a decision. Is it avoidance? Is it a scheduling issue? Is it vibes? Nobody knows, least of all you. When you do turn up, you contribute one (1) very specific thing that is somehow extremely useful.',
+          traits: ['mysterious', 'somehow still liked', 'one very good idea per month', 'unavailable at critical moments']
+        },
+        ideas: {
+          title: 'The Uncontained Brainstorm',
+          sub: 'has 47 ideas, needs 3',
+          desc: 'You are the idea person. The conversation starter. The person who says "wait, what if we—" at the exact moment everyone else thought the project was finished. Sometimes your ideas are the best part. Sometimes they are the reason the project is now 3 weeks behind. Both are true.',
+          traits: ['generative', 'enthusiastic', 'not great at finishing', 'good at the pitch']
+        },
+        mystery: {
+          title: 'The Unclear Participant',
+          sub: 'was there, technically',
+          desc: 'Nobody is entirely sure what you contributed, but you definitely contributed something. You are a liminal figure in the group project ecosystem. You may have been in the room. You may have been in the group chat. The final product includes at least one of your thoughts. Probably.',
+          traits: ['hard to pin down', 'weirdly calm', 'once said something brilliant', 'unbothered']
+        }
+      }
+    },
+    {
+      id: 'study-spot',
+      cat: 'school survival',
+      title: 'Your Study Spot, Decoded',
+      desc: 'Where you study says more about you than your actual study habits. We investigate.',
+      questions: [
+        { q: 'Ideal study temperature:', opts: [
+          { t: 'Slightly too cold, actually. Keeps me awake.', s: 'library' },
+          { t: 'Warm. Cozy. Possibly too cozy.', s: 'bedroom' },
+          { t: 'Outdoors. Fresh air. Sun on the pages.', s: 'outside' },
+          { t: 'Whatever the café is doing.', s: 'cafe' }
+        ]},
+        { q: 'Noise level:', opts: [
+          { t: 'Absolute silence. A pin could drop and I would hear it.', s: 'library' },
+          { t: 'One specific playlist on loop, forever.', s: 'bedroom' },
+          { t: 'Birds, distant traffic, someone\'s dog.', s: 'outside' },
+          { t: 'Ambient chatter, espresso machine, someone\'s very loud call.', s: 'cafe' }
+        ]},
+        { q: 'Snack situation:', opts: [
+          { t: 'None. Snacks are forbidden in here.', s: 'library' },
+          { t: 'Whatever I can reach without standing up.', s: 'bedroom' },
+          { t: 'Something that can be eaten one-handed.', s: 'outside' },
+          { t: 'A drink and one small pastry, as a treat.', s: 'cafe' }
+        ]},
+        { q: 'Time of day:', opts: [
+          { t: 'After school, while the building is still awake.', s: 'library' },
+          { t: 'Late. Very late. The good hours.', s: 'bedroom' },
+          { t: 'Afternoon, in a window of sunlight.', s: 'outside' },
+          { t: 'Saturday morning, before the café gets busy.', s: 'cafe' }
+        ]},
+        { q: 'Main distraction:', opts: [
+          { t: 'Other people studying. Why do they have so many pens?', s: 'library' },
+          { t: 'Everything I own. My room is full of my own things.', s: 'bedroom' },
+          { t: 'The weather, the dogs, the general beauty of the world.', s: 'outside' },
+          { t: 'Other people. But in a nice way.', s: 'cafe' }
+        ]}
+      ],
+      results: {
+        library: {
+          title: 'The Silent Section Regular',
+          sub: 'has a favourite desk and will notice if you take it',
+          desc: 'You need the specific pressure of other people quietly working in order to focus. It\'s not peer pressure — it\'s peer ambience. You\'ve got a desk, a ritual, a slightly-too-cold water bottle, and a very specific relationship with the person who runs the front desk. You are, essentially, part of the library\'s furniture now.',
+          traits: ['focused', 'ritualistic', 'a little territorial', 'quietly thriving']
+        },
+        bedroom: {
+          title: 'The 1am Scholar',
+          sub: 'studies best when the whole world is asleep',
+          desc: 'You have built an entire ecosystem in your room: the lamp at the exact right angle, the playlist, the specific blanket. The problem is the ecosystem is also full of distractions. You study best late at night, when the house is quiet and everything feels slightly unreal. It works. You don\'t recommend it.',
+          traits: ['nocturnal', 'specific', 'surrounded by snacks', 'unavailable before noon']
+        },
+        outside: {
+          title: 'The Outdoor Romantic',
+          sub: 'best ideas happen in the sun',
+          desc: 'You don\'t really study so much as "read outside and think." Your relationship with productivity is creative. Fresh air, natural light, and a page you\'ve been on for 40 minutes. Some of your best thinking happens outside. Some of your least productive hours also happen outside. Both are valuable. Probably.',
+          traits: ['dreamy', 'fresh-air dependent', 'has good ideas in motion', 'will absolutely lose focus']
+        },
+        cafe: {
+          title: 'The Ambient Regular',
+          sub: 'has a usual order and a usual table',
+          desc: 'You need the low hum of other people\'s lives to get anything done. You know the staff, the menu, the good seat. You\'ve done some of your best work there and some of your worst. The barista has seen you at your most and least productive. You tip well. It\'s a whole thing.',
+          traits: ['ambient', 'knows the staff', 'tips well', 'always has a drink nearby']
+        }
+      }
+    },
+    {
+      id: 'music-taste',
+      cat: 'culture',
+      title: 'What Your Music Taste Says About You',
+      desc: 'Absolutely not diagnostic, deeply unserious, surprisingly accurate.',
+      questions: [
+        { q: 'The song that has been on repeat lately:', opts: [
+          { t: 'Something with a very long instrumental outro.', s: 'dreamer' },
+          { t: 'Something you can scream in the car.', s: 'anthem' },
+          { t: 'Something nobody else has heard of.', s: 'curator' },
+          { t: 'Something from 2007 that you rediscovered.', s: 'nostalgic' },
+          { t: 'A song you\'ve heard 400 times and still don\'t know the words to.', s: 'vibes' }
+        ]},
+        { q: 'Ideal listening situation:', opts: [
+          { t: 'Headphones, dark room, lights low.', s: 'dreamer' },
+          { t: 'Windows down, volume up, somewhere to be.', s: 'anthem' },
+          { t: 'Alone, on a walk, pretending it\'s a montage.', s: 'curator' },
+          { t: 'Specific memory. Very specific. Don\'t ask.', s: 'nostalgic' },
+          { t: 'Background. Everything is background music.', s: 'vibes' }
+        ]},
+        { q: 'Your relationship to discovering new music:', opts: [
+          { t: 'I follow the threads. One artist leads to seven more.', s: 'dreamer' },
+          { t: 'My friend sends me things and I trust them completely.', s: 'anthem' },
+          { t: 'I find things. I don\'t share them. They\'re mine.', s: 'curator' },
+          { t: 'I only listen to things I already know. It\'s a system.', s: 'nostalgic' },
+          { t: 'I let the algorithm do it. I have no strong feelings.', s: 'vibes' }
+        ]},
+        { q: 'A song comes on that you loved at 13. You:', opts: [
+          { t: 'Feel it in my whole body. Transported. Devastated.', s: 'dreamer' },
+          { t: 'Turn it up. Sing every word. No shame.', s: 'anthem' },
+          { t: 'Skip it. That was a different me.', s: 'curator' },
+          { t: 'Cry a little. Not a lot. A little.', s: 'nostalgic' },
+          { t: 'Feel nothing. It\'s just a song. Why.', s: 'vibes' }
+        ]},
+        { q: 'Your playlist naming convention:', opts: [
+          { t: 'Something poetic and slightly too long.', s: 'dreamer' },
+          { t: 'ALL CAPS. NO CONTEXT. JUST ENERGY.', s: 'anthem' },
+          { t: 'A single lowercase word.', s: 'curator' },
+          { t: 'A date. Just the date.', s: 'nostalgic' },
+          { t: 'Untitled playlist (47).', s: 'vibes' }
+        ]}
+      ],
+      results: {
+        dreamer: {
+          title: 'The Late-Night Listener',
+          sub: 'puts on headphones and goes somewhere else',
+          desc: 'Music is not background for you — it\'s a full sensory experience. You have a specific relationship with sound, with reverb, with the way a song can change the temperature of a room. You\'ve probably cried to a song in the past month. You\'ve definitely had a full emotional arc in the middle of a walk. That\'s fine. That\'s the point.',
+          traits: ['headphones in', 'not here', 'emotionally available to music', 'specific']
+        },
+        anthem: {
+          title: 'The Car-Screamer',
+          sub: 'volume up, feelings out',
+          desc: 'You are the person who turns the song up. The person who sings every word. The person who, at any given moment, could be in the middle of a very sincere emotional moment in a car with the windows down. You don\'t have a guilty pleasure playlist — you don\'t believe in guilt. You believe in good songs.',
+          traits: ['loud', 'unashamed', 'emotional in public', 'good at karaoke']
+        },
+        curator: {
+          title: 'The Quiet Archivist',
+          sub: 'found it first, shared it never',
+          desc: 'You don\'t just listen to music. You find it. You file it. You have a very specific taste that you\'ve built slowly and deliberately, and you are not really interested in explaining it to anyone. If you share a song, it means something. If you don\'t, that\'s also information.',
+          traits: ['particular', 'private', 'a good recommendation', 'has a system']
+        },
+        nostalgic: {
+          title: 'The Time Traveler',
+          sub: 'permanently partially in 2016',
+          desc: 'Your listening history is a timeline of your life. Certain songs belong to certain years, certain people, certain versions of you. You don\'t just hear a song — you remember what was happening when you first heard it. This is either beautiful or devastating, and sometimes it\'s both at once.',
+          traits: ['sentimental', 'specific memories', 'good at throwbacks', 'always partly elsewhere']
+        },
+        vibes: {
+          title: 'The Ambient Passenger',
+          sub: 'along for the ride, no notes',
+          desc: 'Music is part of the atmosphere for you. You don\'t need to know the name of the song, the album, the artist, the genre. You just need it to be there. You have never once made a playlist with intention. You\'ve never needed to. You are unbothered and it\'s honestly a little enviable.',
+          traits: ['unbothered', 'ambient', 'no strong feelings', 'weirdly chill']
+        }
+      }
+    },
+    {
+      id: 'texting',
+      cat: 'internet culture',
+      title: 'Your Texting Style, Diagnosed',
+      desc: 'Fifteen years of texting and you still don\'t know what your style is. Let\'s find out.',
+      questions: [
+        { q: 'Average text length:', opts: [
+          { t: 'One word. Sometimes a letter.', s: 'minimal' },
+          { t: 'A full paragraph. Sometimes two.', s: 'essayist' },
+          { t: 'Voice notes only. I have things to say.', s: 'voice' },
+          { t: 'Depends entirely on who I\'m texting.', s: 'contextual' }
+        ]},
+        { q: 'Response time:', opts: [
+          { t: 'Instant. I\'m always here.', s: 'minimal' },
+          { t: 'I read it and reply three hours later.', s: 'essayist' },
+          { t: 'I read it and forget and reply three days later.', s: 'voice' },
+          { t: 'When I feel like it. Which varies.', s: 'contextual' }
+        ]},
+        { q: 'Punctuation:', opts: [
+          { t: 'None. Ever. Not even periods.', s: 'minimal' },
+          { t: 'Correct and deliberate. Commas are important.', s: 'essayist' },
+          { t: 'ALL CAPS FOR EMPHASIS AND TYPOS.', s: 'voice' },
+          { t: 'Depends who I\'m talking to.', s: 'contextual' }
+        ]},
+        { q: 'Someone sends you a long, emotional message:', opts: [
+          { t: 'Reply with "omg" and a heart. That\'s enough.', s: 'minimal' },
+          { t: 'Write a full response. Structure it. It matters.', s: 'essayist' },
+          { t: 'Voice note. Immediately. 4 minutes long.', s: 'voice' },
+          { t: 'Read it, think about it, reply tomorrow.', s: 'contextual' }
+        ]},
+        { q: 'Group chat behaviour:', opts: [
+          { t: 'I\'m in it. I don\'t post.', s: 'minimal' },
+          { t: 'I keep the conversation alive and organised.', s: 'essayist' },
+          { t: 'I post the chaos. That\'s my role.', s: 'voice' },
+          { t: 'It depends on the group. Obviously.', s: 'contextual' }
+        ]}
+      ],
+      results: {
+        minimal: {
+          title: 'The Single-Letter Reply',
+          sub: 'communicates in vibes and vibes alone',
+          desc: 'You text like someone who has achieved inner peace. Your replies are brief. Your punctuation is non-existent. Your friends have learned to read your "ok" as a full emotional transmission. You don\'t overshare. You don\'t explain yourself. You are, somehow, very good at making people feel heard while saying almost nothing.',
+          traits: ['brief', 'unbothered', 'chronically online but quiet', 'a good listener']
+        },
+        essayist: {
+          title: 'The Accidental Letter Writer',
+          sub: 'has never sent a short message in their life',
+          desc: 'You text in paragraphs. You use punctuation. You structure your thoughts. Your messages read like you had time to think about them, because you did, and you care. You are the person people come to when they need a real reply. You are also the reason your friends\' notifications are wild.',
+          traits: ['thoughtful', 'specific', 'uses commas', 'the group chat\'s emotional backbone']
+        },
+        voice: {
+          title: 'The Voice Note Menace',
+          sub: '4 minutes and 38 seconds of pure thought',
+          desc: 'You communicate best out loud. Text is too slow, too flat, too editable. A voice note lets you pause, backtrack, change your mind mid-sentence, and laugh at your own joke. You\'ve sent a 7-minute voice note before. You will do it again. People love it or tolerate it. Both are fine.',
+          traits: ['expressive', 'unfiltered', 'long-winded (affectionate)', 'good at stories']
+        },
+        contextual: {
+          title: 'The Situational Texter',
+          sub: 'a different person in every chat',
+          desc: 'You adjust. You match. You become the conversation the other person needs. With some friends you\'re the chaotic one; with others you\'re the calm one; with some you just send memes. This is not fakeness — it\'s fluency. You read the room instinctively, even through a screen. It\'s a skill. It\'s also exhausting.',
+          traits: ['adaptable', 'empathetic', 'hard to pin down', 'very good at group chats']
+        }
+      }
+    },
+    {
+      id: 'weekend',
+      cat: 'internet culture',
+      title: 'The Weekend That Suits You',
+      desc: 'Two days. Infinite potential. Or a nap. Let\'s figure out which.',
+      questions: [
+        { q: 'Saturday morning. You wake up and:', opts: [
+          { t: 'Feel the weight of possibility. I\'m going outside.', s: 'adventure' },
+          { t: 'Roll over and go back to sleep. Obviously.', s: 'rest' },
+          { t: 'Open my phone and disappear into it for an hour.', s: 'scroll' },
+          { t: 'Start cleaning. It\'s a thing.', s: 'ritual' }
+        ]},
+        { q: 'Ideal Saturday afternoon:', opts: [
+          { t: 'Somewhere new. A place I\'ve never been.', s: 'adventure' },
+          { t: 'On my bed, doing nothing, perfectly content.', s: 'rest' },
+          { t: 'Curated internet. A good tab open, a good playlist.', s: 'scroll' },
+          { t: 'A project. Something small and satisfying.', s: 'ritual' }
+        ]},
+        { q: 'Ideal Saturday evening:', opts: [
+          { t: 'Out. With people. Alive.', s: 'adventure' },
+          { t: 'Home. Alone. A film or a long bath.', s: 'rest' },
+          { t: 'A rabbit hole. Deep. Specific. Unshareable.', s: 'scroll' },
+          { t: 'Organising something. The joy is in the doing.', s: 'ritual' }
+        ]},
+        { q: 'Sunday scaries strategy:', opts: [
+          { t: 'Go somewhere. Anywhere. Outrun it.', s: 'adventure' },
+          { t: 'Accept it. Sleep through most of it.', s: 'rest' },
+          { t: 'Doomscroll until it passes.', s: 'scroll' },
+          { t: 'Prepare for the week. The preparation is calming.', s: 'ritual' }
+        ]},
+        { q: 'By Sunday night, you feel:', opts: [
+          { t: 'Energised. It was a good weekend.', s: 'adventure' },
+          { t: 'Rested. Actually rested.', s: 'rest' },
+          { t: 'A bit strange. Where did the weekend go?', s: 'scroll' },
+          { t: 'Satisfied. Everything is in its place.', s: 'ritual' }
+        ]}
+      ],
+      results: {
+        adventure: {
+          title: 'The Outrun-the-Weekend Type',
+          sub: 'two days is not enough and you know it',
+          desc: 'You treat the weekend like a resource. You plan, you go, you do. A good weekend is one where you saw something new or did something you couldn\'t do on a Tuesday. The scaries don\'t get you because you\'re faster than them. Usually. This method works until it doesn\'t. But the photos are good.',
+          traits: ['energetic', 'always out', 'good at plans', 'slightly avoiding something']
+        },
+        rest: {
+          title: 'The Professional Recoverer',
+          sub: 'the weekend exists so you can lie down',
+          desc: 'You understand something important: rest is productive. You don\'t need to fill every hour. You don\'t need to "make the most of it." You need to be horizontal, you need something good on a screen, and you need everyone to leave you alone. This is a skill. Most people are bad at it. You are not.',
+          traits: ['rested', 'sensible', 'a heavy sleeper', 'available for plans, but lowkey']
+        },
+        scroll: {
+          title: 'The Deep Rabbit-Holer',
+          sub: 'the internet is the weekend, actually',
+          desc: 'You disappear. You fall into a rabbit hole. You learn everything about something niche, then forget it by Tuesday. You send screenshots to one specific friend. You close 47 tabs at the end of the day. You\'re not resting exactly, and you\'re not going out, but you\'re somewhere else, and that somewhere is enough.',
+          traits: ['curious', 'online', 'specific interests', 'maybe a little too online']
+        },
+        ritual: {
+          title: 'The Small Project Person',
+          sub: 'the weekend is for fixing the small things',
+          desc: 'You find genuine peace in small tasks. A tidy room, a rearranged shelf, a proper meal, a new system for something that didn\'t need a system. The weekend is when the world becomes slightly more manageable. This is a good way to live. It also means you clean when you\'re stressed. Both things are true.',
+          traits: ['tidy', 'specific', 'a systems person', 'calm (mostly)']
+        }
+      }
+    }
+  ];
+
+  const SEED_OBSESSIONS = [
+    { id:'o1', cat:'music', title:'The Slow Rush', sub:'Tame Impala · 2020', rating:'5', note:'The whole album is one long late-night thought.', color:'#C5B6F5' },
+    { id:'o2', cat:'music', title:'Punisher', sub:'Phoebe Bridgers · 2020', rating:'5', note:'Devastating in the most polite way possible.', color:'#B9D9C7' },
+    { id:'o3', cat:'film', title:'Aftersun', sub:'dir. Charlotte Wells · 2022', rating:'5', note:'I think about the last 10 minutes weekly.', color:'#FFE5A9' },
+    { id:'o4', cat:'film', title:'Lady Bird', sub:'dir. Greta Gerwig · 2017', rating:'4.5', note:'A film about being a teenager that gets it exactly right.', color:'#F48DB5' },
+    { id:'o5', cat:'tv', title:'Fleabag', sub:'season 2, specifically', rating:'5', note:'The confession scene. That\'s it. That\'s the note.', color:'#C5B6F5' },
+    { id:'o6', cat:'book', title:'The Secret History', sub:'Donna Tartt · 1992', rating:'4.5', note:'Gorgeous and terrible and I couldn\'t stop.', color:'#B9D9C7' },
+    { id:'o7', cat:'book', title:'Normal People', sub:'Sally Rooney · 2018', rating:'4', note:'Read it in two days. Emotionally unavailable for a week.', color:'#FFE5A9' },
+    { id:'o8', cat:'character', title:'Cristina Yang', sub:'Grey\'s Anatomy', rating:'5', note:'The blueprint. The standard. The one.', color:'#F48DB5' },
+    { id:'o9', cat:'fandom', title:'The 1975 lore', sub:'ongoing, complicated', rating:'4', note:'It\'s a whole thing. Iykyk. If you don\'t, don\'t ask.', color:'#C5B6F5' }
+  ];
+
+  const SEED_LORE = [
+    {
+      id:'l1',
+      date: new Date(Date.now()-86400000*2).toISOString(),
+      title:'the group project situation',
+      body:`Nobody in my group has said anything for three days. I have decided this means I am now the leader, the intern, and the entire editorial team. I am also, apparently, the only person who has opened the shared document.
+
+The document has one (1) line of text on it: "our group project" — written by me — and a cursor that has been blinking at me for 40 minutes.
+
+I keep saying "it\'s fine" out loud to nobody. It is not fine. But the deadline is Thursday and I have made peace with my new role in the ecosystem.`,
+      tags:['school','group projects','the annual tragedy'],
+      mood:'tired but functional',
+      chaos: 3
+    },
+    {
+      id:'l2',
+      date: new Date(Date.now()-86400000*5).toISOString(),
+      title:'a very specific kind of afternoon',
+      body:`Walked home the long way. It was one of those afternoons where the light is the exact right temperature and someone\'s playing music from a window and you feel like you\'re in the opening credits of a film about a version of your life that is slightly better than this one.
+
+I didn\'t take a photo. I thought about taking a photo. I didn\'t. I\'m choosing to believe that means I was present. This is what I\'m telling myself.`,
+      tags:['walks','nostalgia','the light'],
+      mood:'quietly hopeful',
+      chaos: 1
+    },
+    {
+      id:'l3',
+      date: new Date(Date.now()-86400000*9).toISOString(),
+      title:'do not read this if you are my mother',
+      body:`She said "you\'ll understand when you\'re older" and I said "okay" but what I actually said in my head was "you said that when I was eleven and I still disagree with you."
+
+This is not a fight. This is just a thing that happens now. We\'re fine. It\'s fine. But also: I keep a running note on my phone of the things I\'m going to say when I\'m older. It\'s getting long.`,
+      tags:['family','personal','the ongoing bit'],
+      mood:'contrary',
+      chaos: 4
+    }
+  ];
+
+  const CHAT_SCENARIOS = [
+    {
+      id:'group-project',
+      title:'the group project (again)',
+      sub:'3 people online, nobody typing',
+      chatTitle:'the group project ☠️',
+      members:['maya','jules','kenji','you'],
+      script:[
+        { who:'maya', text:'ok so. be honest. has anyone started the slides', time:'19:14' },
+        { who:'jules', text:'define started', time:'19:14' },
+        { who:'kenji', text:'i opened the document', time:'19:15' },
+        { who:'maya', text:'and?', time:'19:15' },
+        { who:'kenji', text:'and then i closed it', time:'19:15' },
+        { who:'you', text:'i have done the cover slide 🫡', time:'19:16' },
+        { who:'maya', text:'the cover slide is not the project', time:'19:16' },
+        { who:'you', text:'it\'s the most important slide', time:'19:16' },
+        { who:'jules', text:'ok i\'ll do mine tonight. i promise. i\'m gonna be so normal about it', time:'19:17' },
+        { who:'kenji', text:'jules said that last time', time:'19:17' },
+        { who:'jules', text:'and last time i did it!!', time:'19:17' },
+        { who:'kenji', text:'you did it at 6am the day of', time:'19:18' },
+        { who:'jules', text:'so it got done. what are we talking about', time:'19:18' },
+        { who:'maya', text:'i\'m calling it. work session tomorrow after school. library. 4pm.', time:'19:19' },
+        { who:'you', text:'i can\'t tomorrow i have a thing', time:'19:19' },
+        { who:'maya', text:'what thing', time:'19:19' },
+        { who:'you', text:'a thing', time:'19:20' },
+        { who:'kenji', text:'the thing is she doesn\'t want to come', time:'19:20' },
+        { who:'you', text:'the thing is personal', time:'19:20' },
+        { who:'jules', text:'ok honestly respect', time:'19:20' },
+        { who:'maya', text:'fine. thursday. and jules if you do this at 6am again i will be telling everyone\'s parents', time:'19:21' },
+        { who:'jules', text:'thursday is fine. everything is fine.', time:'19:21' },
+        { who:'kenji', text:'nothing is fine but ok', time:'19:22' }
+      ]
+    },
+    {
+      id:'after-party',
+      title:'the morning after',
+      sub:'a night out, discussed',
+      chatTitle:'ok what happened last night',
+      members:['maya','jules','dev','you'],
+      script:[
+        { who:'jules', text:'ok. before anyone says anything. i want to say my version of events', time:'11:02' },
+        { who:'maya', text:'this is going to be good', time:'11:02' },
+        { who:'dev', text:'i need coffee first', time:'11:03' },
+        { who:'jules', text:'i did not push anyone into the pool', time:'11:03' },
+        { who:'dev', text:'the video says otherwise', time:'11:03' },
+        { who:'jules', text:'the video is misleading', time:'11:04' },
+        { who:'maya', text:'the video is 9 seconds of you pushing dev into the pool', time:'11:04' },
+        { who:'jules', text:'i was HELPING him find the pool', time:'11:04' },
+        { who:'dev', text:'i was nowhere near the pool', time:'11:05' },
+        { who:'you', text:'to be fair we were all looking for the pool', time:'11:05' },
+        { who:'maya', text:'we were in a garden', time:'11:05' },
+        { who:'you', text:'which is why we couldn\'t find it', time:'11:06' },
+        { who:'jules', text:'see. context.', time:'11:06' },
+        { who:'dev', text:'i fell into a hot tub', time:'11:06' },
+        { who:'jules', text:'i honestly don\'t remember that part', time:'11:07' },
+        { who:'maya', text:'the hot tub was not even on', time:'11:07' },
+        { who:'dev', text:'i know that now', time:'11:07' },
+        { who:'you', text:'i\'m sorry but this is the funniest thing that\'s happened this term', time:'11:08' },
+        { who:'jules', text:'i\'m glad everyone\'s having a good time', time:'11:08' },
+        { who:'dev', text:'i lost my left shoe', time:'11:08' },
+        { who:'maya', text:'which one', time:'11:09' },
+        { who:'dev', text:'the left one', time:'11:09' },
+        { who:'jules', text:'in the hot tub?', time:'11:09' },
+        { who:'dev', text:'idk it\'s not here', time:'11:09' },
+        { who:'you', text:'it\'s in the hot tub', time:'11:10' },
+        { who:'maya', text:'the hot tub that wasn\'t on', time:'11:10' },
+        { who:'jules', text:'the plot thickens', time:'11:10' }
+      ]
+    },
+    {
+      id:'confession-dm',
+      title:'an unsent draft',
+      sub:'drafted, reconsidered, drafted again',
+      chatTitle:'draft',
+      members:['you'],
+      script:[
+        { who:'you', text:'ok i\'m going to send it. i\'m sending it. here goes.', time:'23:41' },
+        { who:'you', text:'hey. so. i\'ve been thinking about something for a while and i didn\'t know how to say it so i\'m just going to say it', time:'23:41' },
+        { who:'you', text:'[draft saved]', time:'23:42' },
+        { who:'you', text:'ok no that\'s too much. too much. too much. too much.', time:'23:43' },
+        { who:'you', text:'hey. random question. do you want to maybe. idk. hang out. sometime. no pressure. it\'s fine either way. it\'s totally fine.', time:'23:44' },
+        { who:'you', text:'[draft saved]', time:'23:44' },
+        { who:'you', text:'why did i write "it\'s fine either way" three times. why am i like this.', time:'23:46' },
+        { who:'you', text:'ok. final version. deleting all the other versions. hitting send.', time:'23:51' },
+        { who:'you', text:'[draft saved. not sent. 11 months and counting.]', time:'23:52' }
+      ]
+    }
+  ];
+
+  const CHAT_PEOPLE = {
+    maya: { initials:'MK', color:'#F48DB5' },
+    jules: { initials:'JL', color:'#FFE5A9' },
+    kenji: { initials:'KT', color:'#B9D9C7' },
+    dev: { initials:'DR', color:'#C5B6F5' },
+    you: { initials:'YOU', color:'#FFE5A9' }
+  };
+
+  const GREETINGS = [
+    'oh. hi. you\'re here.',
+    'welcome back. we kept your seat.',
+    'you made it. the wifi is dodgy but the vibe is intact.',
+    'hello again. the group chat has been asking about you.',
+    'you\'re just in time. we were about to overthink something.'
+  ];
+
+  const MOOD_LINES = [
+    'currently pretending to study',
+    'listening to the same song on loop',
+    'in the middle of a very long thought',
+    'avoiding the group project (again)',
+    'quietly obsessed with something new',
+    'online but not really here',
+    'the group chat is silent. suspicious.',
+    'thinking about a specific afternoon'
+  ];
+
+  const DAILY_QUESTIONS = [
+    {
+      q: 'Be honest: what\'s the last thing you fell asleep thinking about?',
+      opts: ['A conversation I should have handled differently.', 'A song I\'ve heard 400 times.', 'The group project (crying emoji).', 'Absolutely nothing. Peaceful. Rare.']
+    },
+    {
+      q: 'It\'s 11pm and you have a choice. Which one are you actually doing?',
+      opts: ['Making a very specific playlist.', 'Reading a 400-comment thread about something niche.', 'Texting someone "are you awake".', 'Sleeping like a sensible person.']
+    },
+    {
+      q: 'The most dangerous sentence you\'ve said this week:',
+      opts: ['"I\'ll do it tomorrow."', '"We should totally do that."', '"I\'m not even tired."', '"One more episode."']
+    }
+  ];
+
+  const MOODBOARD_BACKGROUNDS = [
+    { name:'soft white', value:'#FFFCFE' },
+    { name:'paper blush', value:'#F9EAF2' },
+    { name:'lilac', value:'#C5B6F5' },
+    { name:'butter', value:'#FFE5A9' },
+    { name:'sage', value:'#B9D9C7' },
+    { name:'ink', value:'#342B3C' },
+    { name:'pink', value:'#F48DB5' }
+  ];
+
+  const STICKERS = ['✦','♡','☾','☁','✧','→','✿','☆','❋','⌁'];
+
+  // ==========================================================
+  // HELPERS
+  // ==========================================================
+  function uid() { return Math.random().toString(36).slice(2,10); }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function fmtDate(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString(undefined, { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+  }
+  function el(html) {
+    const t = document.createElement('template');
+    t.innerHTML = html.trim();
+    return t.content.firstElementChild;
+  }
+  function toast(msg) {
+    const host = document.getElementById('toast-host');
+    const t = el(`<div class="toast">${esc(msg)}</div>`);
+    host.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity .3s'; setTimeout(()=>t.remove(), 300); }, 2200);
+  }
+
+  // ==========================================================
+  // NAV
+  // ==========================================================
+  const ROUTES = [
+    { path:'#/', label:'Lobby', num:'01' },
+    { path:'#/quizzes', label:'Quizzes', num:'02' },
+    { path:'#/obsessions', label:'Obsessions', num:'03' },
+    { path:'#/lore', label:'Lore', num:'04' },
+    { path:'#/chat', label:'Chat', num:'05' },
+    { path:'#/moodboard', label:'Moodboard', num:'06' }
+  ];
+
+  function renderNav(active) {
+    const navMain = document.getElementById('nav-main');
+    const drawerNav = document.getElementById('drawer-nav');
+    navMain.innerHTML = ROUTES.map(r => {
+      const isActive = active === r.path;
+      return `<a href="${r.path}" class="nav-link ${isActive?'active':''}" ${isActive?'aria-current="page"':''}>${r.label}</a>`;
+    }).join('');
+    drawerNav.innerHTML = ROUTES.map(r => {
+      const isActive = active === r.path;
+      return `<a href="${r.path}" class="${isActive?'active':''}" ${isActive?'aria-current="page"':''}><span class="num">${r.num}</span>${r.label}</a>`;
+    }).join('');
+  }
+
+  // ==========================================================
+  // HOMEPAGE — LOBBY
+  // ==========================================================
+  function renderHome() {
+    const greeting = GREETINGS[Math.floor(Math.random()*GREETINGS.length)];
+    const featQuiz = QUIZZES[0];
+    const obs = STORE.get('obsessions', SEED_OBSESSIONS);
+    const featured = obs[0] || SEED_OBSESSIONS[0];
+    const dq = DAILY_QUESTIONS[Math.floor(Math.random()*DAILY_QUESTIONS.length)];
+    const moodboard = STORE.get('moodboard', null);
+
+    const home = el(`
+      <div class="page lobby">
+        <section class="lobby-hero">
+          <div class="lobby-hero-copy">
+            <div class="lobby-kicker">the internet lobby · est. after the last bell</div>
+            <div class="lobby-greeting">${esc(greeting)}</div>
+            <h1 class="lobby-title">
+              A corner of the internet<br>
+              <span class="accent">that isn't</span> <span class="underline">trying</span> to<br>
+              sell you anything.
+            </h1>
+            <p class="lobby-lede">
+              Quizzes about absolutely nothing important. A moodboard for your current fixations. A private diary, a fictional group chat, and a running archive of everything you're obsessed with this month. Take your time.
+            </p>
+            <div class="lobby-cta-row">
+              <a href="#/quizzes" class="btn primary">Start with a quiz</a>
+              <a href="#/moodboard" class="btn">Make a moodboard</a>
+              <span class="aside-note">no account, no algorithm ↘</span>
+            </div>
+          </div>
+          <div class="lobby-hero-rail">
+            <div class="rail-card tape">
+              <div class="rail-head">✦ a small status update</div>
+              <div class="rail-body" id="rotating-status">the group project is going to be fine. it is going to be fine.</div>
+              <div class="rail-meta">— from the editorial desk (me, at my desk)</div>
+            </div>
+            <div class="rail-card" style="background:var(--butter)">
+              <div class="rail-head">♡ currently obsessed with</div>
+              <div class="obsessed-mini" style="margin-top:6px">
+                <div class="art" style="background:${featured.color||'var(--lilac)'}">${esc(featured.title[0])}</div>
+                <div class="info">
+                  <div class="title">${esc(featured.title)}</div>
+                  <div class="sub">${esc(featured.sub)}</div>
+                </div>
+              </div>
+              <div class="rail-meta" style="margin-top:10px">${esc(featured.note || '')}</div>
+            </div>
+            <div class="rail-card" style="background:var(--sage)">
+              <div class="rail-status">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>the archive is awake · ${new Date().toLocaleDateString(undefined,{weekday:'long'})}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="lobby-grid" aria-label="Things to do">
+          <a href="#/quizzes/${featQuiz.id}" class="feat-quiz featured">
+            <div class="feat-quiz-cover">
+              <span class="cover-tag">featured quiz · ${esc(featQuiz.cat)}</span>
+              <div>
+                <h3>${esc(featQuiz.title)}</h3>
+                <div class="cover-sub">${esc(featQuiz.desc)}</div>
+              </div>
+            </div>
+            <div class="feat-quiz-info">
+              <div class="tag butter">${featQuiz.questions.length} questions</div>
+              <p style="font-size:.9rem;color:var(--ink-soft);margin:0">
+                Five questions. One of five results. Absolutely no useful information will be produced. This is the point.
+              </p>
+              <div class="meta-row">
+                <span>⟶ take the quiz</span>
+              </div>
+            </div>
+          </a>
+
+          <div class="collage-tile wide daily-q" id="daily-question">
+            <div class="tile-label">✦ today's question</div>
+            <div class="q-text">${esc(dq.q)}</div>
+            <div class="q-options">
+              ${dq.opts.map((o,i)=>`<button class="q-opt" data-qopt="${i}">${esc(o)}</button>`).join('')}
+            </div>
+            <div class="q-result" hidden></div>
+          </div>
+
+          <a href="#/obsessions" class="collage-tile butter rot">
+            <div class="tile-label">✧ obsession files</div>
+            <h3>Everything you're currently obsessed with</h3>
+            <p>Music, films, characters, fandoms. A curated shelf, not a spreadsheet.</p>
+            <div class="tag sage" style="align-self:flex-start">${obs.length} entries archived</div>
+          </a>
+
+          <a href="#/lore" class="collage-tile wide" style="background:var(--soft-white)">
+            <div class="tile-label">✎ from the lore archive</div>
+            <h3 style="font-family:var(--serif);font-size:1.35rem;line-height:1.2">
+              ${esc(STORE.get('lore', SEED_LORE)[0]?.title || 'the lore archive')}
+            </h3>
+            <p style="font-family:var(--hand);font-size:1.15rem;color:var(--ink-soft)">
+              ${esc((STORE.get('lore', SEED_LORE)[0]?.body || '').slice(0,120))}…
+            </p>
+            <div style="font-size:.76rem;color:var(--ink-faint)">private · only visible to you</div>
+          </a>
+
+          <a href="#/moodboard" class="collage-tile" style="background:var(--soft-white)">
+            <div class="tile-label">♡ moodboard preview</div>
+            <div class="mb-preview" aria-hidden="true">
+              ${moodboard ? renderMoodboardPreview(moodboard) : `
+                <div class="cell" style="background:var(--lilac)">✦</div>
+                <div class="cell" style="background:var(--pink)"></div>
+                <div class="cell" style="background:var(--butter)"></div>
+                <div class="cell" style="background:var(--sage)"></div>
+                <div class="cell" style="background:var(--soft-white);grid-column:span 2"></div>
+                <div class="cell" style="background:var(--butter)"></div>
+                <div class="cell" style="background:var(--lilac)"></div>
+                <div class="cell" style="background:var(--pink)"></div>
+                <div class="cell" style="background:var(--sage)"></div>
+                <div class="cell" style="background:var(--butter)"></div>
+                <div class="cell" style="background:var(--soft-white)"></div>
+              `}
+            </div>
+            <p style="font-size:.82rem;color:var(--ink-soft);margin-top:6px">a blank canvas with opinions</p>
+          </a>
+
+          <a href="#/chat" class="collage-tile lilac rot" style="grid-column:span 6">
+            <div class="tile-label">💬 fictional group chat</div>
+            <h3>The group project chat is silent. Suspicious.</h3>
+            <p>Three scenarios, four fictional people, several bad decisions. Clearly fiction. Clearly realistic.</p>
+            <div class="tag butter" style="align-self:flex-start">read the chat ⟶</div>
+          </a>
+
+          <a href="#/quizzes" class="collage-tile wide" style="background:var(--ink);color:var(--soft-white);border-color:var(--ink)">
+            <div class="tile-label" style="color:var(--butter)">✦ go be entertained</div>
+            <h3 style="color:var(--soft-white)">${QUIZZES.length} quizzes, all deeply unserious</h3>
+            <p style="color:rgba(255,252,254,.75)">Including "which group project member are you" — which everyone has, at some point, needed to know.</p>
+          </a>
+        </section>
+      </div>
+    `);
+
+    // daily question interaction
+    const dqEl = home.querySelector('#daily-question');
+    dqEl.querySelectorAll('[data-qopt]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        dqEl.querySelectorAll('[data-qopt]').forEach(b => b.classList.remove('picked'));
+        btn.classList.add('picked');
+        const result = dqEl.querySelector('.q-result');
+        result.hidden = false;
+        result.textContent = 'noted. archived under "things we already knew."';
+      });
+    });
+
+    // rotating status
+    const statusEl = home.querySelector('#rotating-status');
+    let idx = 0;
+    const rot = setInterval(() => {
+      if (!statusEl.isConnected) { clearInterval(rot); return; }
+      idx = (idx + 1) % MOOD_LINES.length;
+      statusEl.style.opacity = '0';
+      setTimeout(() => {
+        statusEl.textContent = MOOD_LINES[idx] + '.';
+        statusEl.style.opacity = '1';
+      }, 200);
+    }, 5000);
+
+    return home;
+  }
+
+  function renderMoodboardPreview(mb) {
+    if (!mb || !mb.elements) return '';
+    const els = mb.elements.slice(0, 11);
+    let html = '';
+    for (let i = 0; i < 11; i++) {
+      const e = els[i];
+      if (e && e.type === 'swatch') {
+        html += `<div class="cell" style="background:${esc(e.color||'#C5B6F5')}"></div>`;
+      } else if (e && e.type === 'text') {
+        html += `<div class="cell" style="background:var(--butter);color:var(--ink);font-size:.55rem;overflow:hidden">${esc((e.text||'').slice(0,8))}</div>`;
+      } else {
+        const colors = ['var(--lilac)','var(--pink)','var(--sage)','var(--butter)','var(--soft-white)'];
+        html += `<div class="cell" style="background:${colors[i%colors.length]}"></div>`;
+      }
+    }
+    return html;
+  }
+
+  // ==========================================================
+  // QUIZZES
+  // ==========================================================
+  function renderQuizLibrary() {
+    const page = el(`
+      <div class="page">
+        <div class="page-head">
+          <div class="eyebrow">02 · the quiz library</div>
+          <h1>Things you'll take<br>too seriously.</h1>
+          <p class="lede">
+            Five quizzes. Five results each. None of this means anything, and all of it means something. Pick one. Take your time. Send it to the group chat immediately.
+          </p>
+        </div>
+        <div class="quiz-grid"></div>
+      </div>
+    `);
+    const grid = page.querySelector('.quiz-grid');
+    QUIZZES.forEach((q,i) => {
+      const card = el(`
+        <button class="quiz-card" data-quiz="${q.id}" type="button">
+          <div class="qc-cover">
+            <span class="qc-cat">${esc(q.cat)}</span>
+            <h3>${esc(q.title)}</h3>
+          </div>
+          <div class="qc-body">
+            <p class="qc-desc">${esc(q.desc)}</p>
+            <div class="qc-foot">
+              <span>${q.questions.length} questions · ${Object.keys(q.results).length} results</span>
+              <span class="arrow">⟶</span>
+            </div>
+          </div>
+        </button>
+      `);
+      card.addEventListener('click', () => { location.hash = '#/quizzes/' + q.id; });
+      grid.appendChild(card);
+    });
+    return page;
+  }
+
+  function renderQuizRunner(quizId) {
+    const quiz = QUIZZES.find(q => q.id === quizId);
+    if (!quiz) return renderNotFound();
+    let qIndex = 0;
+    let answers = [];
+
+    const page = el(`
+      <div class="page quiz-run">
+        <div class="quiz-run-head">
+          <button class="back" id="quiz-back">← library</button>
+          <div class="progress-track"><div class="progress-fill" style="width:0%"></div></div>
+          <span class="q-counter"></span>
+        </div>
+        <div id="quiz-stage"></div>
+      </div>
+    `);
+
+    page.querySelector('#quiz-back').addEventListener('click', () => { location.hash = '#/quizzes'; });
+
+    function renderQuestion() {
+      const q = quiz.questions[qIndex];
+      const stage = page.querySelector('#quiz-stage');
+      const fill = page.querySelector('.progress-fill');
+      const counter = page.querySelector('.q-counter');
+      fill.style.width = ((qIndex)/quiz.questions.length*100) + '%';
+      counter.textContent = `${qIndex+1} / ${quiz.questions.length}`;
+
+      stage.innerHTML = `
+        <div class="quiz-question">
+          <div class="qq-tag">question ${String(qIndex+1).padStart(2,'0')}</div>
+          <h2>${esc(q.q)}</h2>
+          <div class="qq-options">
+            ${q.opts.map((o,i) => `
+              <button class="qq-opt" data-opt="${i}" type="button">
+                <span class="letter">${String.fromCharCode(65+i)}</span>
+                <span>${esc(o.t)}</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+        <div class="quiz-run-foot">
+          <span style="font-size:.82rem;color:var(--ink-faint)">no wrong answers. some slightly wrong answers.</span>
+          <button class="btn primary" id="next-btn" disabled>${qIndex === quiz.questions.length-1 ? 'see result →' : 'next →'}</button>
+        </div>
+      `;
+
+      let selected = -1;
+      stage.querySelectorAll('[data-opt]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          stage.querySelectorAll('[data-opt]').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selected = parseInt(btn.dataset.opt,10);
+          stage.querySelector('#next-btn').disabled = false;
+        });
+      });
+
+      stage.querySelector('#next-btn').addEventListener('click', () => {
+        if (selected < 0) return;
+        answers[qIndex] = q.opts[selected].s;
+        if (qIndex < quiz.questions.length-1) {
+          qIndex++;
+          renderQuestion();
+        } else {
+          renderResult();
+        }
+      });
+    }
+
+    function renderResult() {
+      const tally = {};
+      answers.forEach(a => { tally[a] = (tally[a]||0)+1; });
+      const winner = Object.keys(tally).sort((a,b)=>tally[b]-tally[a])[0];
+      const result = quiz.results[winner];
+      page.querySelector('.quiz-run-head').style.display = 'none';
+
+      const allResults = Object.entries(quiz.results).map(([key,r]) =>
+        `<div class="other-item"><strong>${esc(r.title)}</strong><span style="color:var(--ink-faint)">— ${esc(r.sub)}</span></div>`
+      ).join('');
+
+      const stage = page.querySelector('#quiz-stage');
+      stage.innerHTML = `
+        <div class="quiz-result">
+          <div class="result-card">
+            <div class="result-head" style="background:linear-gradient(160deg,var(--lilac),var(--pink))">
+              <span class="result-kicker">your result</span>
+              <h1>${esc(result.title)}</h1>
+              <div class="result-sub">${esc(result.sub)}</div>
+            </div>
+            <div class="result-body">
+              <p class="result-desc">${esc(result.desc)}</p>
+              <div class="result-traits">
+                ${result.traits.map(t => `<span class="tag">${esc(t)}</span>`).join('')}
+              </div>
+              <div class="result-actions">
+                <button class="btn primary" id="retake">retake quiz</button>
+                <button class="btn" id="copy-result">copy result</button>
+                <a class="btn ghost" href="#/quizzes">back to library</a>
+              </div>
+            </div>
+          </div>
+          <div class="result-others">
+            <h3>the other possible answers</h3>
+            <div class="other-list">${allResults}</div>
+          </div>
+        </div>
+      `;
+
+      stage.querySelector('#retake').addEventListener('click', () => {
+        qIndex = 0; answers = [];
+        page.querySelector('.quiz-run-head').style.display = '';
+        renderQuestion();
+      });
+      stage.querySelector('#copy-result').addEventListener('click', () => {
+        const text = `${result.title} — ${result.sub}\n\n${result.desc}\n\nTaken on AFTERCLASS.`;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(()=>toast('result copied. go send it to the group chat.'),()=>toast('could not copy — try selecting the text manually.'));
+        } else {
+          toast('clipboard not available in this browser.');
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    renderQuestion();
+    return page;
+  }
+
+  // ==========================================================
+  // OBSESSIONS
+  // ==========================================================
+  const OBS_CATS = [
+    { id:'music', label:'music' },
+    { id:'film', label:'film' },
+    { id:'tv', label:'television' },
+    { id:'book', label:'books' },
+    { id:'character', label:'characters' },
+    { id:'fandom', label:'fandoms' }
+  ];
+
+  function renderObsessions() {
+    let obs = STORE.get('obsessions', SEED_OBSESSIONS);
+    let search = '';
+    let filter = 'all';
+
+    const page = el(`
+      <div class="page">
+        <div class="page-head">
+          <div class="eyebrow">03 · obsession files</div>
+          <h1>A running archive<br>of current fixations.</h1>
+          <p class="lede">
+            Everything you've loved, are loving, or have loved so much you had to archive it. Music, films, characters, fandoms. Notes included because the notes are the whole point.
+          </p>
+        </div>
+        <div class="obs-toolbar">
+          <div class="obs-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input type="search" id="obs-search" placeholder="search your archive…" aria-label="Search obsessions">
+          </div>
+          <div class="filter-chips" id="obs-filters">
+            <button class="chip active" data-cat="all">all</button>
+            ${OBS_CATS.map(c => `<button class="chip" data-cat="${c.id}">${c.label}</button>`).join('')}
+          </div>
+          <button class="btn primary" id="add-obs">+ add an obsession</button>
+        </div>
+        <div id="obs-body"></div>
+      </div>
+    `);
+
+    function refresh() {
+      let filtered = obs;
+      if (filter !== 'all') filtered = filtered.filter(o => o.cat === filter);
+      if (search) {
+        const s = search.toLowerCase();
+        filtered = filtered.filter(o =>
+          (o.title||'').toLowerCase().includes(s) ||
+          (o.sub||'').toLowerCase().includes(s) ||
+          (o.note||'').toLowerCase().includes(s)
+        );
+      }
+      const body = page.querySelector('#obs-body');
+
+      if (obs.length === 0) {
+        body.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-mark">✦</div>
+            <h3>The shelf is empty. For now.</h3>
+            <p>Add the first thing you're currently obsessed with. A song, a film, a character you can't stop thinking about. Anything counts.</p>
+            <button class="btn primary" id="empty-add">add your first obsession</button>
+          </div>
+        `;
+        body.querySelector('#empty-add').addEventListener('click', () => openAddModal());
+        return;
+      }
+
+      if (filtered.length === 0) {
+        body.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-mark">·</div>
+            <h3>Nothing matches.</h3>
+            <p>Try a different search, or a different category. The archive is still here.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const groups = {};
+      filtered.forEach(o => {
+        (groups[o.cat] = groups[o.cat] || []).push(o);
+      });
+      const order = ['music','film','tv','book','character','fandom'];
+      const html = `<div class="obs-collection">` + order.filter(k => groups[k]).map(cat => {
+        const catInfo = OBS_CATS.find(c => c.id === cat);
+        return `
+          <section>
+            <div class="obs-cat-head">
+              <h2>${esc(catInfo.label)}</h2>
+              <span class="count">${groups[cat].length}</span>
+              <span class="accent-line"></span>
+            </div>
+            <div class="obs-grid">
+              ${groups[cat].map(o => `
+                <div class="obs-item">
+                  <button class="obs-del" data-del="${o.id}" aria-label="Delete ${esc(o.title)}" title="remove">×</button>
+                  <div class="obs-cover" style="background:${o.img ? 'transparent' : (o.color||'var(--lilac)')}">
+                    ${o.img
+                      ? `<img src="${esc(o.img)}" alt="" loading="lazy" onerror="this.style.display='none'; this.parentNode.querySelector('.fallback-letter').style.display='grid'"><div class="fallback-letter" style="display:none;position:absolute;inset:0;place-items:center">${esc(o.title[0])}</div>`
+                      : `<div class="fallback-letter">${esc(o.title[0])}</div>`
+                    }
+                    ${o.rating ? `<span class="rating">${esc(o.rating)}★</span>` : ''}
+                  </div>
+                  <div class="obs-info">
+                    <div class="obs-title">${esc(o.title)}</div>
+                    <div class="obs-sub">${esc(o.sub||'')}</div>
+                    ${o.note ? `<div class="obs-note">"${esc(o.note)}"</div>` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+        `;
+      }).join('') + `</div>`;
+
+      body.innerHTML = html;
+      body.querySelectorAll('[data-del]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const id = btn.dataset.del;
+          const item = obs.find(o => o.id === id);
+          if (!item) return;
+          if (!confirm(`Remove "${item.title}" from your archive?`)) return;
+          obs = obs.filter(o => o.id !== id);
+          STORE.set('obsessions', obs);
+          toast('removed from the archive.');
+          refresh();
+        });
+      });
+    }
+
+    function openAddModal() {
+      const scrim = document.getElementById('modal-scrim');
+      scrim.innerHTML = `
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+          <div class="modal-head">
+            <h2 id="modal-title">add to the archive</h2>
+            <button class="modal-close" aria-label="Close">×</button>
+          </div>
+          <div class="field">
+            <label for="o-title">what is it</label>
+            <input class="input" id="o-title" placeholder="title" maxlength="80">
+          </div>
+          <div class="field">
+            <label for="o-cat">category</label>
+            <select class="select" id="o-cat">
+              ${OBS_CATS.map(c => `<option value="${c.id}">${c.label}</option>`).join('')}
+            </select>
+          </div>
+          <div class="field">
+            <label for="o-sub">subtitle / creator / year</label>
+            <input class="input" id="o-sub" placeholder="e.g. Phoebe Bridgers · 2020" maxlength="80">
+          </div>
+          <div class="field">
+            <label for="o-rating">rating (optional)</label>
+            <input class="input" id="o-rating" placeholder="e.g. 4.5" maxlength="4">
+          </div>
+          <div class="field">
+            <label for="o-note">your note</label>
+            <textarea class="textarea" id="o-note" rows="3" placeholder="why does this matter to you" maxlength="240"></textarea>
+          </div>
+          <div class="field">
+            <label for="o-img">image URL (optional)</label>
+            <input class="input" id="o-img" placeholder="https://…" maxlength="400">
+          </div>
+          <div class="modal-actions">
+            <button class="btn ghost" id="modal-cancel">cancel</button>
+            <button class="btn primary" id="modal-save">add to archive</button>
+          </div>
+        </div>
+      `;
+      scrim.classList.add('open');
+      scrim.querySelector('#modal-cancel').addEventListener('click', closeModal);
+      scrim.querySelector('.modal-close').addEventListener('click', closeModal);
+      scrim.addEventListener('click', (e) => { if (e.target === scrim) closeModal(); });
+      setTimeout(() => scrim.querySelector('#o-title').focus(), 50);
+      scrim.querySelector('#modal-save').addEventListener('click', () => {
+        const title = scrim.querySelector('#o-title').value.trim();
+        if (!title) { toast('needs a title.'); return; }
+        const item = {
+          id: uid(),
+          title,
+          cat: scrim.querySelector('#o-cat').value,
+          sub: scrim.querySelector('#o-sub').value.trim(),
+          rating: scrim.querySelector('#o-rating').value.trim(),
+          note: scrim.querySelector('#o-note').value.trim(),
+          img: scrim.querySelector('#o-img').value.trim(),
+          color: ['#C5B6F5','#F48DB5','#FFE5A9','#B9D9C7'][Math.floor(Math.random()*4)]
+        };
+        obs.push(item);
+        STORE.set('obsessions', obs);
+        closeModal();
+        toast('added to the archive.');
+        refresh();
+      });
+    }
+
+    function closeModal() {
+      const scrim = document.getElementById('modal-scrim');
+      scrim.classList.remove('open');
+      scrim.innerHTML = '';
+    }
+
+    page.querySelector('#obs-search').addEventListener('input', e => { search = e.target.value; refresh(); });
+    page.querySelector('#obs-filters').addEventListener('click', e => {
+      const chip = e.target.closest('.chip');
+      if (!chip) return;
+      filter = chip.dataset.cat;
+      page.querySelectorAll('#obs-filters .chip').forEach(c => c.classList.toggle('active', c === chip));
+      refresh();
+    });
+    page.querySelector('#add-obs').addEventListener('click', openAddModal);
+
+    refresh();
+    return page;
+  }
+
+  // ==========================================================
+  // LORE ARCHIVE
+  // ==========================================================
+  function renderLore() {
+    let entries = STORE.get('lore', SEED_LORE);
+    let search = '';
+
+    const page = el(`
+      <div class="page">
+        <div class="page-head">
+          <div class="eyebrow">04 · lore archive</div>
+          <h1>Private. Local.<br>Not a social feed.</h1>
+          <p class="lede">
+            This is a diary, not content. Entries save to your browser only — nobody else sees them, and they're gone if you clear your data. Write whatever. Nobody's reading.
+          </p>
+        </div>
+        <div class="lore-layout">
+          <aside class="lore-sidebar">
+            <h2>the archive</h2>
+            <div class="sidebar-note">your private corner</div>
+            <button class="btn primary" id="new-entry">+ write an entry</button>
+            <div class="lore-filters">
+              <div class="field">
+                <label for="lore-search">search entries</label>
+                <input class="input" id="lore-search" type="search" placeholder="search titles and text…">
+              </div>
+            </div>
+            <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:.78rem;color:var(--ink-faint);line-height:1.5">
+              <strong style="color:var(--ink-soft)">on privacy:</strong> everything here lives in this browser. No account, no server. Clear site data and it's gone forever. That's the deal.
+            </div>
+          </aside>
+          <div>
+            <div id="lore-body"></div>
+          </div>
+        </div>
+      </div>
+    `);
+
+    function refresh() {
+      let filtered = [...entries].sort((a,b) => new Date(b.date) - new Date(a.date));
+      if (search) {
+        const s = search.toLowerCase();
+        filtered = filtered.filter(e =>
+          (e.title||'').toLowerCase().includes(s) ||
+          (e.body||'').toLowerCase().includes(s) ||
+          (e.tags||[]).some(t => t.toLowerCase().includes(s))
+        );
+      }
+      const body = page.querySelector('#lore-body');
+      if (entries.length === 0) {
+        body.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-mark">✎</div>
+            <h3>The archive is blank.</h3>
+            <p>Start with something small. A thing that happened, a thing you thought, a thing you don't want to say out loud yet.</p>
+            <button class="btn primary" id="empty-write">write your first entry</button>
+          </div>
+        `;
+        body.querySelector('#empty-write').addEventListener('click', () => openEditor(null));
+        return;
+      }
+      if (filtered.length === 0) {
+        body.innerHTML = `<div class="empty-state"><div class="empty-mark">·</div><h3>Nothing matches that search.</h3></div>`;
+        return;
+      }
+      body.innerHTML = `<div class="lore-entries">` + filtered.map(e => `
+        <article class="lore-entry" data-id="${e.id}">
+          <div class="entry-date">${fmtDate(e.date)}</div>
+          <h3>${esc(e.title || 'untitled')}</h3>
+          <div class="entry-body">${esc(e.body || '')}</div>
+          <div class="entry-meta">
+            ${(e.tags||[]).map(t => `<span class="tag">${esc(t)}</span>`).join('')}
+            ${e.mood ? `<span class="tag butter">mood: ${esc(e.mood)}</span>` : ''}
+            ${e.chaos ? `<span class="chaos-meter">chaos <span class="bars">${[1,2,3,4,5].map(n=>`<span class="bar ${n<=e.chaos?'filled':''}"></span>`).join('')}</span></span>` : ''}
+          </div>
+          <div class="entry-actions">
+            <button class="btn small ghost" data-act="expand">${e.body && e.body.length > 260 ? 'read full entry' : 'entry is short'}</button>
+            <button class="btn small" data-act="edit">edit</button>
+            <button class="btn small" data-act="delete" style="border-color:var(--pink)">delete</button>
+          </div>
+        </article>
+      `).join('') + `</div>`;
+
+      body.querySelectorAll('.lore-entry').forEach(entryEl => {
+        const id = entryEl.dataset.id;
+        const item = entries.find(e => e.id === id);
+        entryEl.querySelector('[data-act="expand"]').addEventListener('click', (e) => {
+          entryEl.classList.toggle('expanded');
+          e.target.textContent = entryEl.classList.contains('expanded') ? 'show less' : 'read full entry';
+        });
+        entryEl.querySelector('[data-act="edit"]').addEventListener('click', () => openEditor(item));
+        entryEl.querySelector('[data-act="delete"]').addEventListener('click', () => {
+          if (!confirm('Delete this entry? This cannot be undone.')) return;
+          entries = entries.filter(e => e.id !== id);
+          STORE.set('lore', entries);
+          toast('entry deleted.');
+          refresh();
+        });
+      });
+    }
+
+    function openEditor(existing) {
+      const scrim = document.getElementById('modal-scrim');
+      const isNew = !existing;
+      const dateVal = existing ? new Date(existing.date).toISOString().slice(0,10) : new Date().toISOString().slice(0,10);
+      scrim.innerHTML = `
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+          <div class="modal-head">
+            <h2 id="modal-title">${isNew ? 'new entry' : 'edit entry'}</h2>
+            <button class="modal-close" aria-label="Close">×</button>
+          </div>
+          <div class="field">
+            <label for="e-title">title</label>
+            <input class="input" id="e-title" placeholder="a title, or just a date" maxlength="120" value="${esc(existing?.title||'')}">
+          </div>
+          <div class="field">
+            <label for="e-date">date</label>
+            <input class="input" type="date" id="e-date" value="${dateVal}">
+          </div>
+          <div class="field">
+            <label for="e-body">entry</label>
+            <textarea class="textarea body" id="e-body" rows="8" placeholder="what actually happened">${esc(existing?.body||'')}</textarea>
+          </div>
+          <div class="editor-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="field">
+              <label for="e-tags">tags (comma separated)</label>
+              <input class="input" id="e-tags" placeholder="school, friends, the usual" value="${esc((existing?.tags||[]).join(', '))}">
+            </div>
+            <div class="field">
+              <label for="e-mood">mood</label>
+              <input class="input" id="e-mood" placeholder="e.g. quietly hopeful" maxlength="40" value="${esc(existing?.mood||'')}">
+            </div>
+          </div>
+          <div class="field">
+            <label>chaos rating</label>
+            <div class="chaos-picker" id="e-chaos">
+              ${[1,2,3,4,5].map(n => `<button type="button" data-chaos="${n}" class="${(existing?.chaos||3)===n?'active':''}">${n}</button>`).join('')}
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button class="btn ghost" id="modal-cancel">cancel</button>
+            <button class="btn primary" id="modal-save">${isNew ? 'save entry' : 'update entry'}</button>
+          </div>
+        </div>
+      `;
+      scrim.classList.add('open');
+      scrim.addEventListener('click', (e) => { if (e.target === scrim) closeEditor(); });
+      scrim.querySelector('.modal-close').addEventListener('click', closeEditor);
+      scrim.querySelector('#modal-cancel').addEventListener('click', closeEditor);
+      let chaos = existing?.chaos || 3;
+      scrim.querySelectorAll('#e-chaos [data-chaos]').forEach(b => {
+        b.addEventListener('click', () => {
+          chaos = parseInt(b.dataset.chaos,10);
+          scrim.querySelectorAll('#e-chaos [data-chaos]').forEach(x => x.classList.toggle('active', x === b));
+        });
+      });
+      setTimeout(() => scrim.querySelector('#e-title').focus(), 50);
+      scrim.querySelector('#modal-save').addEventListener('click', () => {
+        const title = scrim.querySelector('#e-title').value.trim();
+        const body = scrim.querySelector('#e-body').value.trim();
+        if (!title && !body) { toast('needs at least a title or some text.'); return; }
+        const tags = scrim.querySelector('#e-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+        const entry = {
+          id: existing?.id || uid(),
+          date: new Date(scrim.querySelector('#e-date').value).toISOString(),
+          title: title || 'untitled',
+          body,
+          tags,
+          mood: scrim.querySelector('#e-mood').value.trim(),
+          chaos
+        };
+        if (isNew) entries.unshift(entry);
+        else entries = entries.map(e => e.id === entry.id ? entry : e);
+        STORE.set('lore', entries);
+        closeEditor();
+        toast(isNew ? 'entry saved to the archive.' : 'entry updated.');
+        refresh();
+      });
+    }
+
+    function closeEditor() {
+      const scrim = document.getElementById('modal-scrim');
+      scrim.classList.remove('open');
+      scrim.innerHTML = '';
+    }
+
+    page.querySelector('#new-entry').addEventListener('click', () => openEditor(null));
+    page.querySelector('#lore-search').addEventListener('input', e => { search = e.target.value; refresh(); });
+
+    refresh();
+    return page;
+  }
+
+  // ==========================================================
+  // GROUP CHAT
+  // ==========================================================
+  function renderChat() {
+    let activeScenario = CHAT_SCENARIOS[0];
+    let playing = false;
+    let timeouts = [];
+
+    const page = el(`
+      <div class="page">
+        <div class="page-head">
+          <div class="eyebrow">05 · fictional group chat</div>
+          <h1>Fictional conversations,<br>very real group-chat energy.</h1>
+          <p class="lede">
+            These are made-up people in made-up situations. No real conversations are happening here. Pick a scenario. Watch it play out. Regenerate if you want a different take.
+          </p>
+        </div>
+        <div class="chat-wrap">
+          <aside class="chat-scenarios">
+            <h2>scenarios</h2>
+            <div id="scenario-list"></div>
+            <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:.72rem;color:var(--ink-faint);line-height:1.5">
+              fictional. simulated. nobody said these things to you.
+            </div>
+          </aside>
+          <div class="chat-main">
+            <div class="chat-header">
+              <div class="chat-avatars" id="chat-avatars"></div>
+              <div class="chat-title">
+                <h2 id="chat-title">loading…</h2>
+                <div class="chat-sub" id="chat-sub"></div>
+              </div>
+              <span class="chat-fic">fictional</span>
+            </div>
+            <div class="chat-body" id="chat-body" aria-live="polite"></div>
+            <div class="chat-controls">
+              <button class="btn primary small" id="play-chat">play conversation</button>
+              <button class="btn small" id="regen-chat">regenerate</button>
+              <button class="btn small ghost" id="clear-chat">clear</button>
+              <div class="spacer"></div>
+              <button class="btn small ghost" id="export-chat">export</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `);
+
+    const scenarioList = page.querySelector('#scenario-list');
+    const chatBody = page.querySelector('#chat-body');
+    const chatTitle = page.querySelector('#chat-title');
+    const chatSub = page.querySelector('#chat-sub');
+    const avatarsEl = page.querySelector('#chat-avatars');
+
+    function renderScenarios() {
+      scenarioList.innerHTML = CHAT_SCENARIOS.map(s => `
+        <button class="scenario-btn ${s.id === activeScenario.id ? 'active' : ''}" data-scen="${s.id}">
+          ${esc(s.title)}
+          <span class="s-meta">${esc(s.sub)}</span>
+        </button>
+      `).join('');
+      scenarioList.querySelectorAll('[data-scen]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeScenario = CHAT_SCENARIOS.find(s => s.id === btn.dataset.scen);
+          renderScenarios();
+          resetChat();
+        });
+      });
+    }
+
+    function renderHeader() {
+      chatTitle.textContent = activeScenario.chatTitle;
+      chatSub.textContent = activeScenario.members.length + ' members · ' + activeScenario.sub;
+      const uniqueMembers = activeScenario.members.filter(m => m !== 'you');
+      avatarsEl.innerHTML = uniqueMembers.slice(0,3).map(m => {
+        const p = CHAT_PEOPLE[m] || { initials:'?', color:'#C5B6F5' };
+        return `<div class="av" style="background:${p.color}">${esc(p.initials)}</div>`;
+      }).join('');
+    }
+
+    function resetChat() {
+      timeouts.forEach(t => clearTimeout(t));
+      timeouts = [];
+      playing = false;
+      renderHeader();
+      chatBody.innerHTML = '';
+      page.querySelector('#play-chat').disabled = false;
+      page.querySelector('#play-chat').textContent = 'play conversation';
+      const start = el(`<div style="text-align:center;padding:24px 12px;color:var(--ink-faint);font-family:var(--hand);font-size:1.2rem">
+        press play to begin the (fictional) conversation
+      </div>`);
+      chatBody.appendChild(start);
+    }
+
+    function appendMessage(msg, i) {
+      const person = CHAT_PEOPLE[msg.who] || { initials:'?', color:'#C5B6F5' };
+      const isOut = msg.who === 'you';
+      const row = el(`
+        <div class="msg-row ${isOut?'out':''}" style="animation: msgIn .3s ease">
+          <div class="msg-av" style="background:${person.color}" aria-hidden="true">${esc(person.initials)}</div>
+          <div>
+            ${!isOut ? `<div class="msg-name">${esc(msg.who)}</div>` : ''}
+            <div class="msg-bubble">${esc(msg.text)}</div>
+            <div class="msg-time">${esc(msg.time || '')}</div>
+          </div>
+        </div>
+      `);
+      chatBody.appendChild(row);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function play() {
+      if (playing) return;
+      playing = true;
+      timeouts.forEach(t => clearTimeout(t));
+      timeouts = [];
+      chatBody.innerHTML = '';
+      page.querySelector('#play-chat').disabled = true;
+      page.querySelector('#play-chat').textContent = 'playing…';
+
+      const script = activeScenario.script;
+      let cumulative = 0;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      script.forEach((msg, i) => {
+        const delay = reduceMotion ? 30 : 700 + Math.random()*400;
+        cumulative += delay;
+        const t = setTimeout(() => {
+          const typing = el(`<div class="chat-typing" aria-hidden="true"><span></span><span></span><span></span></div>`);
+          if (!reduceMotion) {
+            chatBody.appendChild(typing);
+            chatBody.scrollTop = chatBody.scrollHeight;
+          }
+          const t2 = setTimeout(() => {
+            if (typing.isConnected) typing.remove();
+            appendMessage(msg, i);
+            if (i === script.length - 1) {
+              playing = false;
+              page.querySelector('#play-chat').disabled = false;
+              page.querySelector('#play-chat').textContent = 'play again';
+            }
+          }, reduceMotion ? 10 : 500);
+          timeouts.push(t2);
+        }, cumulative);
+        timeouts.push(t);
+      });
+    }
+
+    page.querySelector('#play-chat').addEventListener('click', play);
+
+    page.querySelector('#regen-chat').addEventListener('click', () => {
+      // shuffle the script a bit — regroup into slightly different order preserving context
+      const script = [...activeScenario.script];
+      if (script.length > 4) {
+        // swap two adjacent pairs from the middle
+        const i = Math.floor(script.length * 0.3);
+        const j = Math.floor(script.length * 0.6);
+        [script[i], script[j]] = [script[j], script[i]];
+      }
+      activeScenario = { ...activeScenario, script };
+      resetChat();
+      toast('regenerated. slightly different. still fictional.');
+    });
+
+    page.querySelector('#clear-chat').addEventListener('click', () => {
+      timeouts.forEach(t => clearTimeout(t));
+      timeouts = [];
+      playing = false;
+      chatBody.innerHTML = '';
+      page.querySelector('#play-chat').disabled = false;
+      page.querySelector('#play-chat').textContent = 'play conversation';
+    });
+
+    page.querySelector('#export-chat').addEventListener('click', () => {
+      const text = activeScenario.script.map(m => `[${m.time||''}] ${m.who}: ${m.text}`).join('\n');
+      downloadText(`${activeScenario.id}-chat.txt`, `AFTERCLASS — fictional conversation\nScenario: ${activeScenario.title}\n\n${text}\n\nThis is a fictional simulation.\n`);
+    });
+
+    renderScenarios();
+    resetChat();
+    return page;
+  }
+
+  // ==========================================================
+  // MOODBOARD STUDIO
+  // ==========================================================
+  function renderMoodboard() {
+    let board = STORE.get('moodboard', null);
+    if (!board) {
+      board = {
+        id: uid(),
+        name: 'untitled board',
+        bg: '#FFFCFE',
+        elements: [
+          { id: uid(), type:'text', x:18, y:20, w:64, h:16, text:'things I am currently thinking about', size:22 },
+          { id: uid(), type:'swatch', x:8, y:50, w:14, h:14, color:'#F48DB5' },
+          { id: uid(), type:'swatch', x:24, y:50, w:14, h:14, color:'#C5B6F5' },
+          { id: uid(), type:'swatch', x:40, y:50, w:14, h:14, color:'#B9D9C7' },
+          { id: uid(), type:'swatch', x:56, y:50, w:14, h:14, color:'#FFE5A9' },
+          { id: uid(), type:'quote', x:12, y:70, w:50, h:14, text:'"the light was perfect and I didn\'t take a photo"' }
+        ]
+      };
+    }
+    let selectedId = null;
+    let history = [];
+    let historyIndex = -1;
+
+    const page = el(`
+      <div class="page">
+        <div class="page-head" style="margin-bottom:18px;padding-bottom:14px">
+          <div class="eyebrow">06 · moodboard studio</div>
+          <h1 style="font-size:clamp(1.8rem,3.5vw,2.6rem)">Make a collage of<br>whatever you're thinking about.</h1>
+        </div>
+        <div class="mb-layout">
+          <aside class="mb-sidebar">
+            <div>
+              <h3>add to canvas</h3>
+              <div class="mb-tools">
+                <button class="mb-tool" data-add="text">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 6h14M12 6v12M8 18h8"/></svg> text
+                </button>
+                <button class="mb-tool" data-add="quote">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h5v5H6zM13 7h5v5h-5zM6 14h5v5H6zM13 14h5v5h-5z"/></svg> quote
+                </button>
+                <button class="mb-tool" data-add="swatch">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/></svg> colour swatch
+                </button>
+                <button class="mb-tool" data-add="sticker">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z"/></svg> sticker
+                </button>
+                <button class="mb-tool" data-add="image">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5-5-6 6"/></svg> image url
+                </button>
+              </div>
+            </div>
+            <div>
+              <h3>background</h3>
+              <div class="mb-bg-swatches" id="bg-swatches">
+                ${MOODBOARD_BACKGROUNDS.map(b => `<button class="mb-swatch ${board.bg === b.value ? 'active':''}" data-bg="${b.value}" style="background:${b.value}" title="${esc(b.name)}" aria-label="background ${esc(b.name)}"></button>`).join('')}
+              </div>
+            </div>
+            <div>
+              <h3>templates</h3>
+              <div class="mb-tools" style="grid-template-columns:1fr">
+                <button class="mb-tool" id="tpl-current">current obsessions</button>
+                <button class="mb-tool" id="tpl-clear">start blank</button>
+              </div>
+            </div>
+            <div style="margin-top:auto;padding-top:10px;font-size:.72rem;color:var(--ink-faint);line-height:1.5">
+              click an element to select it. drag to move. arrow keys nudge. Delete removes.
+            </div>
+          </aside>
+          <div>
+            <div class="mb-canvas-wrap">
+              <div class="mb-canvas" id="mb-canvas" style="background:${board.bg}"></div>
+              <div class="mb-canvas-controls">
+                <button id="mb-undo" title="undo" aria-label="Undo">↶</button>
+                <button id="mb-redo" title="redo" aria-label="Redo">↷</button>
+                <button id="mb-export" title="export as image" aria-label="Export as image">⤓</button>
+              </div>
+              <div class="mb-inspector" id="mb-inspector">
+                <button data-insp="edit" title="edit text" aria-label="Edit">✎</button>
+                <button data-insp="dup" title="duplicate" aria-label="Duplicate">⧉</button>
+                <button data-insp="del" title="delete" aria-label="Delete">×</button>
+              </div>
+            </div>
+            <div class="mb-bottom-bar">
+              <input class="mb-board-name" id="mb-name" value="${esc(board.name)}" aria-label="Board name" maxlength="60">
+              <div class="spacer"></div>
+              <button class="btn small" id="mb-save">save board</button>
+              <button class="btn small ghost" id="mb-duplicate">duplicate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `);
+
+    const canvas = page.querySelector('#mb-canvas');
+    const inspector = page.querySelector('#mb-inspector');
+
+    function pushHistory() {
+      history = history.slice(0, historyIndex+1);
+      history.push(JSON.parse(JSON.stringify({ bg:board.bg, elements:board.elements })));
+      if (history.length > 40) history.shift();
+      historyIndex = history.length - 1;
+    }
+
+    function renderCanvas() {
+      canvas.style.background = board.bg;
+      canvas.innerHTML = '';
+      board.elements.forEach(e => {
+        const node = el(`<div class="mb-el ${e.id === selectedId ? 'selected':''}" style="left:${e.x}%;top:${e.y}%;width:${e.w}%;height:${e.h}%;transform:rotate(${e.rot||0}deg)" data-id="${e.id}"></div>`);
+        const content = document.createElement('div');
+        content.className = 'el-content';
+        if (e.type === 'text') {
+          content.classList.add('text-el');
+          content.style.fontSize = (e.size||18) + 'px';
+          content.textContent = e.text || 'text';
+        } else if (e.type === 'quote') {
+          content.classList.add('quote-el');
+          content.style.fontSize = (e.size||16) + 'px';
+          content.textContent = e.text || '"quote"';
+        } else if (e.type === 'swatch') {
+          content.style.background = e.color || '#C5B6F5';
+        } else if (e.type === 'sticker') {
+          content.classList.add('sticker-el');
+          content.style.fontSize = (e.size||36) + 'px';
+          content.textContent = e.text || '✦';
+        } else if (e.type === 'image') {
+          if (e.url) {
+            const img = document.createElement('img');
+            img.src = e.url;
+            img.alt = '';
+            img.onerror = () => { content.innerHTML = '<div style="font-family:var(--hand);font-size:.9rem;padding:4px;text-align:center;color:var(--ink-soft)">image failed to load</div>'; };
+            content.appendChild(img);
+          } else {
+            content.innerHTML = '<div style="font-family:var(--hand);font-size:.9rem;padding:4px;text-align:center;color:var(--ink-soft)">image</div>';
+          }
+        }
+        node.appendChild(content);
+        canvas.appendChild(node);
+        enableDrag(node, e);
+      });
+      updateInspector();
+    }
+
+    function updateInspector() {
+      const sel = board.elements.find(e => e.id === selectedId);
+      if (!sel) { inspector.classList.remove('show'); return; }
+      inspector.classList.add('show');
+      inspector.querySelector('[data-insp="edit"]').style.display = (sel.type === 'text' || sel.type === 'quote' || sel.type === 'sticker') ? '' : 'none';
+    }
+
+    function enableDrag(node, e) {
+      let dragging = false, startX, startY, origX, origY;
+      node.addEventListener('pointerdown', (ev) => {
+        if (ev.target.closest('button')) return;
+        ev.preventDefault();
+        selectedId = e.id;
+        page.querySelectorAll('.mb-el').forEach(n => n.classList.toggle('selected', n.dataset.id === e.id));
+        updateInspector();
+        dragging = true;
+        node.classList.add('dragging');
+        node.setPointerCapture(ev.pointerId);
+        startX = ev.clientX; startY = ev.clientY;
+        origX = e.x; origY = e.y;
+        pushHistory();
+      });
+      node.addEventListener('pointermove', (ev) => {
+        if (!dragging) return;
+        const rect = canvas.getBoundingClientRect();
+        const dx = (ev.clientX - startX) / rect.width * 100;
+        const dy = (ev.clientY - startY) / rect.height * 100;
+        e.x = Math.max(0, Math.min(100 - e.w, origX + dx));
+        e.y = Math.max(0, Math.min(100 - e.h, origY + dy));
+        node.style.left = e.x + '%';
+        node.style.top = e.y + '%';
+      });
+      node.addEventListener('pointerup', () => {
+        if (dragging) {
+          dragging = false;
+          node.classList.remove('dragging');
+          saveLocal();
+        }
+      });
+      node.addEventListener('pointercancel', () => { dragging = false; node.classList.remove('dragging'); });
+    }
+
+    canvas.addEventListener('click', (ev) => {
+      if (ev.target.closest('.mb-el')) return;
+      selectedId = null;
+      page.querySelectorAll('.mb-el').forEach(n => n.classList.remove('selected'));
+      updateInspector();
+    });
+
+    inspector.addEventListener('click', (ev) => {
+      const btn = ev.target.closest('button');
+      if (!btn) return;
+      const sel = board.elements.find(e => e.id === selectedId);
+      if (!sel) return;
+      if (btn.dataset.insp === 'del') {
+        board.elements = board.elements.filter(e => e.id !== selectedId);
+        selectedId = null;
+        pushHistory();
+        renderCanvas();
+        saveLocal();
+      } else if (btn.dataset.insp === 'dup') {
+        const copy = JSON.parse(JSON.stringify(sel));
+        copy.id = uid();
+        copy.x = Math.min(90, copy.x + 4);
+        copy.y = Math.min(90, copy.y + 4);
+        board.elements.push(copy);
+        selectedId = copy.id;
+        pushHistory();
+        renderCanvas();
+        saveLocal();
+      } else if (btn.dataset.insp === 'edit') {
+        const newText = prompt('edit text:', sel.text || '');
+        if (newText !== null && newText.trim()) {
+          sel.text = newText.trim();
+          pushHistory();
+          renderCanvas();
+          saveLocal();
+        }
+      }
+    });
+
+    function addElement(type) {
+      const base = { id: uid(), type, x: 30, y: 30, w: 30, h: 12, rot: (Math.random()-.5)*6 };
+      if (type === 'text') { base.text = 'new text'; base.w = 40; base.h = 10; base.size = 20; }
+      else if (type === 'quote') { base.text = '"a quote"'; base.w = 40; base.h = 14; base.size = 16; }
+      else if (type === 'swatch') { base.w = 12; base.h = 12; base.color = ['#F48DB5','#C5B6F5','#B9D9C7','#FFE5A9'][Math.floor(Math.random()*4)]; }
+      else if (type === 'sticker') { base.w = 10; base.h = 10; base.text = STICKERS[Math.floor(Math.random()*STICKERS.length)]; base.size = 40; }
+      else if (type === 'image') {
+        const url = prompt('image URL:');
+        if (!url || !url.trim()) return;
+        base.url = url.trim();
+        base.w = 28; base.h = 28;
+      }
+      board.elements.push(base);
+      selectedId = base.id;
+      pushHistory();
+      renderCanvas();
+      saveLocal();
+    }
+
+    page.querySelectorAll('[data-add]').forEach(btn => {
+      btn.addEventListener('click', () => addElement(btn.dataset.add));
+    });
+
+    page.querySelector('#bg-swatches').addEventListener('click', (ev) => {
+      const btn = ev.target.closest('[data-bg]');
+      if (!btn) return;
+      board.bg = btn.dataset.bg;
+      page.querySelectorAll('#bg-swatches .mb-swatch').forEach(s => s.classList.toggle('active', s === btn));
+      pushHistory();
+      renderCanvas();
+      saveLocal();
+    });
+
+    page.querySelector('#tpl-current').addEventListener('click', () => {
+      board.elements = [
+        { id: uid(), type:'text', x:10, y:10, w:80, h:12, text:'current obsessions', size:26 },
+        { id: uid(), type:'swatch', x:10, y:30, w:18, h:18, color:'#F48DB5' },
+        { id: uid(), type:'swatch', x:32, y:30, w:18, h:18, color:'#C5B6F5' },
+        { id: uid(), type:'swatch', x:54, y:30, w:18, h:18, color:'#B9D9C7' },
+        { id: uid(), type:'swatch', x:76, y:30, w:14, h:18, color:'#FFE5A9' },
+        { id: uid(), type:'quote', x:10, y:56, w:80, h:12, text:'"everything I liked this month, no explanations"' }
+      ];
+      selectedId = null;
+      pushHistory();
+      renderCanvas();
+      saveLocal();
+    });
+    page.querySelector('#tpl-clear').addEventListener('click', () => {
+      if (!confirm('clear the canvas?')) return;
+      board.elements = [];
+      selectedId = null;
+      pushHistory();
+      renderCanvas();
+      saveLocal();
+    });
+
+    function saveLocal() {
+      STORE.set('moodboard', board);
+    }
+    function pushHistoryAndSave() { pushHistory(); saveLocal(); }
+
+    page.querySelector('#mb-save').addEventListener('click', () => {
+      board.name = page.querySelector('#mb-name').value.trim() || 'untitled board';
+      saveLocal();
+      toast('board saved.');
+    });
+    page.querySelector('#mb-duplicate').addEventListener('click', () => {
+      const copy = JSON.parse(JSON.stringify(board));
+      copy.id = uid();
+      copy.name = board.name + ' (copy)';
+      copy.elements = copy.elements.map(e => ({ ...e, id: uid(), x: Math.min(90, e.x+3), y: Math.min(90, e.y+3) }));
+      STORE.set('moodboard', copy);
+      toast('duplicated. reloading the copy.');
+      setTimeout(() => renderRoute(), 100);
+    });
+
+    page.querySelector('#mb-undo').addEventListener('click', () => {
+      if (historyIndex <= 0) return;
+      historyIndex--;
+      const state = history[historyIndex];
+      board.bg = state.bg;
+      board.elements = state.elements;
+      selectedId = null;
+      renderCanvas();
+      saveLocal();
+    });
+    page.querySelector('#mb-redo').addEventListener('click', () => {
+      if (historyIndex >= history.length - 1) return;
+      historyIndex++;
+      const state = history[historyIndex];
+      board.bg = state.bg;
+      board.elements = state.elements;
+      selectedId = null;
+      renderCanvas();
+      saveLocal();
+    });
+
+    page.querySelector('#mb-export').addEventListener('click', () => {
+      // Render to canvas
+      const w = 800, h = 600;
+      const out = document.createElement('canvas');
+      out.width = w; out.height = h;
+      const ctx = out.getContext('2d');
+      ctx.fillStyle = board.bg;
+      ctx.fillRect(0,0,w,h);
+
+      const drawEl = (e) => {
+        const x = e.x/100*w, y = e.y/100*h, ww = e.w/100*w, hh = e.h/100*h;
+        ctx.save();
+        if (e.rot) {
+          ctx.translate(x+ww/2, y+hh/2);
+          ctx.rotate(e.rot * Math.PI/180);
+          ctx.translate(-(x+ww/2), -(y+hh/2));
+        }
+        if (e.type === 'text' || e.type === 'quote') {
+          ctx.fillStyle = '#342B3C';
+          ctx.font = (e.type==='quote'?'italic ':'') + (e.size||18) + 'px Georgia, serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          // simple word wrap
+          const words = (e.text||'').split(' ');
+          const lineH = (e.size||18)*1.3;
+          let line = '', lines = [];
+          words.forEach(word => {
+            const test = line + word + ' ';
+            if (ctx.measureText(test).width > ww - 10 && line) {
+              lines.push(line.trim()); line = word + ' ';
+            } else line = test;
+          });
+          lines.push(line.trim());
+          lines.forEach((l,i) => ctx.fillText(l, x+ww/2, y+hh/2 + (i - (lines.length-1)/2)*lineH));
+        } else if (e.type === 'swatch') {
+          ctx.fillStyle = e.color || '#C5B6F5';
+          ctx.fillRect(x,y,ww,hh);
+        } else if (e.type === 'sticker') {
+          ctx.fillStyle = '#342B3C';
+          ctx.font = (e.size||36) + 'px Caveat, cursive';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(e.text || '✦', x+ww/2, y+hh/2);
+        } else if (e.type === 'image' && e.url) {
+          // try to draw image if loaded synchronously; otherwise placeholder
+          const img = new Image();
+          img.crossOrigin = 'anonymous';
+          img.src = e.url;
+          try { ctx.drawImage(img, x, y, ww, hh); } catch(err) {
+            ctx.fillStyle = '#e5d6de';
+            ctx.fillRect(x,y,ww,hh);
+            ctx.fillStyle = '#342B3C';
+            ctx.font = '12px Georgia';
+            ctx.fillText('image', x+ww/2, y+hh/2);
+          }
+        }
+        ctx.restore();
+      };
+      board.elements.forEach(drawEl);
+
+      out.toBlob(blob => {
+        if (!blob) { toast('could not export.'); return; }
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = (board.name||'moodboard') + '.png';
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        toast('exported as png.');
+      });
+    });
+
+    // keyboard nudge for selected element
+    const keyHandler = (ev) => {
+      if (!page.isConnected) { document.removeEventListener('keydown', keyHandler); return; }
+      if (!selectedId) return;
+      const tag = document.activeElement?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      const sel = board.elements.find(e => e.id === selectedId);
+      if (!sel) return;
+      const step = ev.shiftKey ? 2 : 0.5;
+      if (ev.key === 'Delete' || ev.key === 'Backspace') {
+        ev.preventDefault();
+        board.elements = board.elements.filter(e => e.id !== selectedId);
+        selectedId = null;
+        pushHistory();
+        renderCanvas();
+        saveLocal();
+      } else if (ev.key === 'ArrowLeft') { ev.preventDefault(); sel.x = Math.max(0, sel.x-step); renderCanvas(); saveLocal(); }
+      else if (ev.key === 'ArrowRight') { ev.preventDefault(); sel.x = Math.min(100-sel.w, sel.x+step); renderCanvas(); saveLocal(); }
+      else if (ev.key === 'ArrowUp') { ev.preventDefault(); sel.y = Math.max(0, sel.y-step); renderCanvas(); saveLocal(); }
+      else if (ev.key === 'ArrowDown') { ev.preventDefault(); sel.y = Math.min(100-sel.h, sel.y+step); renderCanvas(); saveLocal(); }
+    };
+    document.addEventListener('keydown', keyHandler);
+
+    pushHistory();
+    renderCanvas();
+    return page;
+  }
+
+  // ==========================================================
+  // SETTINGS / SEARCH / EXPORT
+  // ==========================================================
+  function downloadText(filename, text) {
+    const blob = new Blob([text], { type:'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast('downloaded ' + filename);
+  }
+
+  function openSettings() {
+    const scrim = document.getElementById('modal-scrim');
+    scrim.innerHTML = `
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+        <div class="modal-head">
+          <h2 id="settings-title">your archive</h2>
+          <button class="modal-close" aria-label="Close">×</button>
+        </div>
+        <p style="font-size:.9rem;color:var(--ink-soft);line-height:1.55">
+          Everything you've made lives in this browser. Export it as a backup, or clear everything and start fresh.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin:20px 0">
+          <button class="btn" id="export-all">export all data (json)</button>
+          <button class="btn ghost" id="clear-all" style="border-color:var(--pink)">clear all data</button>
+        </div>
+        <div style="font-size:.76rem;color:var(--ink-faint);line-height:1.6;border-top:1px solid var(--line);padding-top:12px">
+          <strong style="color:var(--ink-soft)">what's saved:</strong> obsessions, lore entries, moodboard.<br>
+          <strong style="color:var(--ink-soft)">what's not:</strong> quiz answers and chats are session-only. They don't leave your browser either way.
+        </div>
+      </div>
+    `;
+    scrim.classList.add('open');
+    const close = () => { scrim.classList.remove('open'); scrim.innerHTML = ''; };
+    scrim.querySelector('.modal-close').addEventListener('click', close);
+    scrim.addEventListener('click', (e) => { if (e.target === scrim) close(); });
+    scrim.querySelector('#export-all').addEventListener('click', () => {
+      const data = {
+        exportedAt: new Date().toISOString(),
+        obsessions: STORE.get('obsessions', SEED_OBSESSIONS),
+        lore: STORE.get('lore', SEED_LORE),
+        moodboard: STORE.get('moodboard', null)
+      };
+      downloadText('afterclass-archive.json', JSON.stringify(data, null, 2));
+    });
+    scrim.querySelector('#clear-all').addEventListener('click', () => {
+      if (!confirm('Clear ALL saved data? This cannot be undone.')) return;
+      ['obsessions','lore','moodboard'].forEach(k => localStorage.removeItem('afterclass:'+k));
+      toast('archive cleared.');
+      close();
+      renderRoute();
+    });
+  }
+
+  function openSearch() {
+    const scrim = document.getElementById('modal-scrim');
+    scrim.innerHTML = `
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="search-title">
+        <div class="modal-head">
+          <h2 id="search-title">search everything</h2>
+          <button class="modal-close" aria-label="Close">×</button>
+        </div>
+        <input class="input" id="global-search" placeholder="quizzes, obsessions, lore entries…" style="margin-bottom:14px">
+        <div id="global-results"></div>
+      </div>
+    `;
+    scrim.classList.add('open');
+    const close = () => { scrim.classList.remove('open'); scrim.innerHTML = ''; };
+    scrim.querySelector('.modal-close').addEventListener('click', close);
+    scrim.addEventListener('click', (e) => { if (e.target === scrim) close(); });
+
+    const input = scrim.querySelector('#global-search');
+    const results = scrim.querySelector('#global-results');
+
+    function update() {
+      const s = input.value.toLowerCase().trim();
+      if (!s) { results.innerHTML = '<p style="color:var(--ink-faint);font-size:.85rem">type to search across the archive.</p>'; return; }
+      const hits = [];
+      QUIZZES.forEach(q => { if ((q.title+q.desc+q.cat).toLowerCase().includes(s)) hits.push({ kind:'quiz', label:q.title, href:'#/quizzes/'+q.id }); });
+      STORE.get('obsessions', SEED_OBSESSIONS).forEach(o => { if ((o.title+(o.sub||'')+(o.note||'')).toLowerCase().includes(s)) hits.push({ kind:'obsession', label:o.title, href:'#/obsessions' }); });
+      STORE.get('lore', SEED_LORE).forEach(e => { if ((e.title+(e.body||'')).toLowerCase().includes(s)) hits.push({ kind:'lore', label:e.title, href:'#/lore' }); });
+      if (!hits.length) { results.innerHTML = '<p style="color:var(--ink-faint);font-size:.85rem">nothing found. try a different word.</p>'; return; }
+      results.innerHTML = hits.slice(0,12).map(h => `
+        <a href="${h.href}" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:4px;margin-bottom:6px;font-size:.88rem">
+          <span>${esc(h.label)}</span>
+          <span class="tag" style="font-size:.62rem">${h.kind}</span>
+        </a>
+      `).join('');
+      results.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+    }
+    input.addEventListener('input', update);
+    update();
+    setTimeout(() => input.focus(), 60);
+  }
+
+  // ==========================================================
+  // ROUTER
+  // ==========================================================
+  function renderNotFound() {
+    return el(`
+      <div class="page page-narrow" style="text-align:center;padding-top:80px">
+        <div class="section-label">404 · not here</div>
+        <h1 style="font-family:var(--serif);font-size:2.4rem;margin:16px 0">This page wandered off.</h1>
+        <p style="color:var(--ink-soft);max-width:36ch;margin:0 auto 22px">It happens. The internet is large and this is a small archive. Try one of the main rooms instead.</p>
+        <a href="#/" class="btn primary">return to the lobby</a>
+      </div>
+    `);
+  }
+
+  function renderRoute() {
+    const hash = location.hash || '#/';
+    const main = document.getElementById('main');
+    let activeNav = hash;
+    let content;
+
+    if (hash === '#/' || hash === '') {
+      activeNav = '#/';
+      content = renderHome();
+    } else if (hash === '#/quizzes') {
+      content = renderQuizLibrary();
+    } else if (hash.startsWith('#/quizzes/')) {
+      activeNav = '#/quizzes';
+      content = renderQuizRunner(hash.replace('#/quizzes/',''));
+    } else if (hash === '#/obsessions') {
+      content = renderObsessions();
+    } else if (hash === '#/lore') {
+      content = renderLore();
+    } else if (hash === '#/chat') {
+      content = renderChat();
+    } else if (hash === '#/moodboard') {
+      content = renderMoodboard();
+    } else {
+      content = renderNotFound();
+    }
+
+    main.innerHTML = '';
+    main.appendChild(content);
+    renderNav(activeNav);
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  }
+
+  // ==========================================================
+  // GLOBAL UI
+  // ==========================================================
+  function setupMobileNav() {
+    const toggle = document.getElementById('mobile-toggle');
+    const drawer = document.getElementById('drawer');
+    const scrim = document.getElementById('drawer-scrim');
+    const close = document.getElementById('drawer-close');
+    function open() { drawer.classList.add('open'); scrim.classList.add('open'); toggle.setAttribute('aria-expanded','true'); }
+    function shut() { drawer.classList.remove('open'); scrim.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); }
+    toggle.addEventListener('click', open);
+    close.addEventListener('click', shut);
+    scrim.addEventListener('click', shut);
+    drawer.addEventListener('click', (e) => { if (e.target.closest('a')) shut(); });
+  }
+
+  function setupMoodRotation() {
+    const mood = document.getElementById('mood-text');
+    if (!mood) return;
+    let i = Math.floor(Math.random()*MOOD_LINES.length);
+    setInterval(() => {
+      i = (i + 1) % MOOD_LINES.length;
+      mood.style.opacity = '0';
+      setTimeout(() => { mood.textContent = MOOD_LINES[i]; mood.style.opacity = '1'; }, 200);
+    }, 8000);
+    mood.style.transition = 'opacity .3s';
+  }
+
+  // init
+  document.getElementById('search-btn').addEventListener('click', openSearch);
+  document.getElementById('settings-btn').addEventListener('click', openSettings);
+  setupMobileNav();
+  setupMoodRotation();
+  window.addEventListener('hashchange', renderRoute);
+  renderRoute();
+
+  // close modal on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const scrim = document.getElementById('modal-scrim');
+      if (scrim.classList.contains('open')) { scrim.classList.remove('open'); scrim.innerHTML=''; }
+      document.getElementById('drawer').classList.remove('open');
+      document.getElementById('drawer-scrim').classList.remove('open');
+    }
+  });
+
+})();
+</script>
+</body>
+</html>
